@@ -6,16 +6,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gwg.user.web.configuration.AuthUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import com.alibaba.fastjson.JSON;
-import com.gwg.user.common.Constant;
-import com.gwg.user.common.entity.Result;
-import com.gwg.user.dto.UserDto;
-import com.gwg.user.util.SessionUtil;
+import com.gwg.user.web.common.Constant;
+import com.gwg.user.web.common.Result;
+import com.gwg.user.web.dto.UserDto;
+import com.gwg.user.web.util.SessionUtil;
 import com.gwg.user.web.security.HttpForbiddenEntryPoint;
 
 public class UserAccessDeniedHandler implements AccessDeniedHandler {
@@ -27,8 +28,8 @@ public class UserAccessDeniedHandler implements AccessDeniedHandler {
     	logger.info("用户没权限访问 start .........");
     	HttpForbiddenEntryPoint.writeCrosInfo(response);
         Result<String> result = Result.error("600", "没有权限访问");
-        UserDto userDto = SessionUtil.getSessionAttribute(Constant.SESSION_KEY_USER, request);
-        if (null == userDto) {
+        AuthUser authUser = SessionUtil.getSessionAttribute(Constant.USER_SESSION, request);
+        if (null == authUser) {
             result = Result.error("610", "用户未登录");
         }
         JSON.writeJSONString(response.getWriter(), result);

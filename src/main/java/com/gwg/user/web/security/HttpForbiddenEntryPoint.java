@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 import com.alibaba.fastjson.JSON;
-import com.gwg.user.common.entity.Result;
+import com.gwg.user.web.common.Result;
 
 /**
  * 当用户请求了一个受保护的资源，但是用户没通过认证，那么抛出异常

@@ -1,8 +1,8 @@
 package com.gwg.user.web.controller;
 
-import com.gwg.user.common.ErrorCode;
-import com.gwg.user.common.entity.Result;
-import com.gwg.user.dto.UserDto;
+import com.gwg.user.web.common.ErrorCode;
+import com.gwg.user.web.common.Result;
+import com.gwg.user.web.dto.UserDto;
 import com.gwg.user.web.authority.RequestContext;
 
 
@@ -36,7 +36,7 @@ public class BaseController {
     protected String getCurrentUserId() {
     	UserDto user = getCurrentUser();
         if (null != user) {
-            return Long.toString(user.getId());
+            return Long.toString(user.getUserId());
         }
         return null;
     }

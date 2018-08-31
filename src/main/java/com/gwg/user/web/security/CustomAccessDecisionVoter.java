@@ -3,6 +3,8 @@ package com.gwg.user.web.security;
 import java.util.Collection;
 import java.util.Set;
 
+import com.gwg.user.web.authority.AuthorityManager;
+import com.gwg.user.web.common.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,8 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.FilterInvocation;
 
-import com.gwg.user.common.Constant;
-import com.gwg.user.dto.UserDto;
-import com.gwg.user.util.SessionUtil;
-import com.gwg.user.web.authority.AuthorityManager;
+import com.gwg.user.web.dto.UserDto;
+import com.gwg.user.web.util.SessionUtil;
 
 /**
  * 自定义投票者

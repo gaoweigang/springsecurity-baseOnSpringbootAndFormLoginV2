@@ -3,13 +3,12 @@ package com.gwg.user.web.authority;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gwg.user.web.dto.UserDto;
 import lombok.Data;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.gwg.user.dto.UserDto;
 
 /**
  */
