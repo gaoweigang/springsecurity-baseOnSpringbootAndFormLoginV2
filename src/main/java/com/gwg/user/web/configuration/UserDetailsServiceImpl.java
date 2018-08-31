@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -31,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("该用户不存在！");
 		}
 		logger.info("登录用户信息：" + JSON.toJSON(account));
-		AuthUser user = new AuthUser(account.getUserId(), account.getPassword(), true, true, true, false, null);
+		UserInfo user = new UserInfo(account.getUserId(), account.getPassword(), true, true, true, false, null);
 		return user;
 	}
 

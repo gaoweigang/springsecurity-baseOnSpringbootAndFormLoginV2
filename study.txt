@@ -1,6 +1,8 @@
 1.访问授权策略
 https://www.cnblogs.com/quyixuanblog/p/5213503.html
 
+https://blog.csdn.net/u012702547/article/details/79019510
+
 AffirmativeBased
 ConsensusBased 基于共识
 UnanimousBased

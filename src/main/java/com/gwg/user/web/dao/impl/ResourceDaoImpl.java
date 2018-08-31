@@ -8,7 +8,6 @@ import com.gwg.user.web.model.Resource;
 import com.gwg.user.web.model.ResourceExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 

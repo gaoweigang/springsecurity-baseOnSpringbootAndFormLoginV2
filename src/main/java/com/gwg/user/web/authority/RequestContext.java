@@ -3,6 +3,7 @@ package com.gwg.user.web.authority;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.gwg.user.web.configuration.AuthUser;
 import com.gwg.user.web.dto.UserDto;
 import lombok.Data;
 
@@ -29,7 +30,7 @@ public class RequestContext {
 
     protected HttpServletRequest request;
     protected HttpServletResponse response;
-    protected UserDto userDto;
+    protected AuthUser authUser;
     protected String ati;
 
     public String getRemoteHost() {

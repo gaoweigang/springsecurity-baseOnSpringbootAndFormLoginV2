@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.gwg.user.web.authority.AuthorityManager;
 import com.gwg.user.web.common.Constant;
+import com.gwg.user.web.configuration.AuthUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,12 @@ public class CustomAccessDecisionVoter implements AccessDecisionVoter{
 	        if (null == fi) {
 	            return ACCESS_GRANTED; //
 	        }
-	        UserDto userDto = SessionUtil.getSessionAttribute(Constant.SESSION_KEY_USER, fi.getRequest());
-	        if (null == userDto) {
+	        AuthUser authUser = SessionUtil.getSessionAttribute(Constant.USER_SESSION, fi.getRequest());
+	        if (null == authUser) {
 	            return ACCESS_DENIED; //访问拒绝
 	        }
 	        String function = fi.getRequestUrl(); //获取请求路径
-	        Set<String> userOwnRoles = userDto.getRoles(); //获取用户所拥有的的角色集合
+	        Set<String> userOwnRoles = authUser.getRoles(); //获取用户所拥有的的角色集合
 	        //从数据库中查询访问该URI需要哪些角色
 	        Set<String> needRoles = authorityManager.getAllowedRolesByUrl(function);//根据URI获取角色
 	        //判断该用户身份有所需要的岗位

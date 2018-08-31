@@ -5,7 +5,9 @@ import com.gwg.user.web.exception.BusinessException;
 import com.gwg.user.web.model.Account;
 import com.gwg.user.web.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AccountServiceImpl implements AccountService {
 
     @Autowired

@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 /**
  *
@@ -34,22 +35,6 @@ public class AuthUser implements Serializable{
 
 	private String position;
 
-	private Boolean status;
-
-	private Boolean validFlag;
-
-	private Date entryTime;
-
-	private Date resignTime;
-
-	private Date createTime;
-
-	private Date modifyTime;
-
-	private String creator;
-
-	private String modifier;
-
-	private String remark;
+    private Set<String> roles;
 
 }

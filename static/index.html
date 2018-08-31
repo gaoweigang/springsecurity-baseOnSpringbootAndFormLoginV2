@@ -80,7 +80,7 @@ function login(btn) {
 	console.log("请求参数"+username+", 请求密码："+password);
     $.ajax({
         type: 'post',
-        url: 'http://localhost:8088/user/ajaxLogin',
+        url: 'http://localhost:8088/login',
         contentType: "application/json",
       /*当dataType指定为json后,1.4+以上的jquery版本对json格式要求更加严格.如果不是严格的json格式,就不能正常执行success回调函数.
         JSON格式总结下，详细的去json.org 查看。 　　 

@@ -5,11 +5,13 @@ import java.util.List;
 
 import com.gwg.user.web.handler.UserAccessDeniedHandler;
 import com.gwg.user.web.handler.UserAuthenticationFailureHandler;
+import com.gwg.user.web.handler.UserLogoutSuccessHandler;
 import com.gwg.user.web.security.HttpForbiddenEntryPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.RoleVoter;
@@ -27,7 +29,10 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import com.gwg.user.web.handler.UserAuthenticationSuccessHandler;
 import com.gwg.user.web.security.CustomAccessDecisionVoter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.web.cors.CorsUtils;
 
+@Configuration
 //基于标准的，并且允许简单的基于角色的约束。但是并不具备SpringSecurity的原生注解能力。要使用基于表达式的语法
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity// 开启Security，使用该注解后会创建过滤器链
@@ -51,28 +56,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		logger.info("配置spring security start ....");
 		// UsernamePasswordAuthenticationFilter
 		http.authorizeRequests()
-				.antMatchers("/user/ajaxLogin").permitAll() //登陆接口可以匿名访问
+				.antMatchers("/login").permitAll()
 		        .accessDecisionManager(accessDecisionManager())//配置投票系统
 		        //.antMatchers("/success.html").hasRole("ADMIN") //设置访问success.html页面需要拥有ROLE_ADMIN角色,这个可以配置到数据库里面，使用自定义的投票器来处理
 		        //.antMatchers("/index.html").permitAll();// 访问index.html不要权限验证
 				.anyRequest().authenticated();// 其他所有路径都需要权限校验
-		         
+
+        http.cors().configurationSource()
 		http.csrf().disable();// 默认开启，这里先显式关闭
 		http.formLogin() // 内部注册 UsernamePasswordAuthenticationFilter
-				.loginPage("/login.html") // 前后端分离项目，注释掉 配置使用自定义的表单登录页面地址
-				.loginProcessingUrl("/user/ajaxLogin")// form表单POST请求url提交地址，默认为/login
+				//.loginPage("/login.html") // 前后端分离项目，注释掉 配置使用自定义的表单登录页面地址
+				.loginProcessingUrl("/login")// form表单POST请求url提交地址，默认为/login
 				.passwordParameter("password")// form表单用户名参数名
 				.usernameParameter("username") // form表单密码参数名
 				// 登录成功跳转到成功处理器,这个只能访问handler method , 可以使用successHandler替换
-				.successForwardUrl("/login-success") 
+				//.successForwardUrl("/login-success")
 				// 登录失败跳转到失败处理器，这个只能访问handler method，可以使用failureHandler替换
-				.failureForwardUrl("/login-error") 
+				//.failureForwardUrl("/login-error")
 				/*
 				 * 如果successForwardUrl 和 defaultSuccessUrl 都配置了，后面会把前面的配置覆盖掉
 				 * successForwardUrl ：服务器端跳转 defaultSuccessUrl ： 重定向，即客户端跳转
 				 */
-				.defaultSuccessUrl("/index.html") // 如果用户没有访问受保护的页面，默认跳转到页面。如果用户访问了受保护的页面，则直接展示受保护页面
-				.failureUrl("/error.html")
+				//.defaultSuccessUrl("/index.html") // 如果用户没有访问受保护的页面，默认跳转到页面。如果用户访问了受保护的页面，则直接展示受保护页面
+				//.failureUrl("/error.html")
 				/*
 				 * 如果failureForwardUrl和failureHandler都配置了，后面的配置会把前面的配置覆盖掉，
 				 * 注意这与failureUrl不同。
@@ -99,6 +105,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticationEntryPoint(httpForbiddenEntryPoint())//当用户请求了一个受保护的资源，但是用户没通过认证，那么抛出异常
 				.accessDeniedHandler(accessDeniedHandler())
 				.accessDeniedPage("/deny.html");//配置访问拒绝页面
+
+		// 登出
+		http.logout()
+				.deleteCookies("JSESSIONID") //从cookie中删除JSESSIONID
+				.invalidateHttpSession(true) //配置在登出的时候，使HttpSession无效
+				.logoutSuccessHandler(logoutSuccessHandler()) //成功登出之后
+				.permitAll();
+
 	}
 
 	// 认证成功handler
@@ -111,6 +125,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	AuthenticationFailureHandler authFailureHandler() {
 		return new UserAuthenticationFailureHandler();
+	}
+
+	// 登出handler
+	@Bean
+	LogoutSuccessHandler logoutSuccessHandler() {
+		return new UserLogoutSuccessHandler();
 	}
 
 	//异常处理

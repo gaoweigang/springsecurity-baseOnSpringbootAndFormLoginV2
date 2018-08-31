@@ -34,9 +34,10 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 			throws IOException, ServletException {
 		logger.info("用户认证成功后的处理 start .....");
 		//1.查询当前登录用户的用户信息
-		AuthUser authUser = userService.getAuthUserByUserId(username);
+		//authentication.getPrincipal()
+		//AuthUser authUser = userService.getAuthUserByUserId(username);
 		//2.把用户信息放到Session中
-		SessionUtil.setSessionAttribute(Constant.USER_SESSION, authUser, request);
+		SessionUtil.setSessionAttribute(Constant.USER_SESSION, null, request);
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 }
