@@ -3,6 +3,10 @@ https://www.cnblogs.com/quyixuanblog/p/5213503.html
 
 https://blog.csdn.net/u012702547/article/details/79019510
 
+spring-boot-starter-data-mongodb
+spring-cloud-starter-eureka
+spring-cloud-starter-feign
+
 AffirmativeBased
 ConsensusBased 基于共识
 UnanimousBased
