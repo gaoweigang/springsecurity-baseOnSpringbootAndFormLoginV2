@@ -650,3 +650,24 @@ Using default security password: d3c72be3-d491-474e-92d0-e2385bb383e7
 [INFO] 2018-08-31 18:27:00.242 [http-nio-8088-exec-2] [org.springframework.web.servlet.FrameworkServlet]508 - FrameworkServlet 'dispatcherServlet': initialization completed in 22 ms 
 [INFO] 2018-08-31 18:27:04.377 [http-nio-8088-exec-2] [com.gwg.user.web.security.CustomAccessDecisionVoter]35 - ******************请求路径：FilterInvocation: URL: /login 
 [INFO] 2018-08-31 18:27:17.322 [http-nio-8088-exec-2] [com.gwg.user.web.security.HttpForbiddenEntryPoint]31 - 登录异常：{}org.springframework.security.authentication.InsufficientAuthenticationException: Full authentication is required to access this resource 
+[INFO] 2018-08-31 18:44:16.493 [main] [org.springframework.boot.StartupInfoLogger]48 - Starting Application on DESKTOP-6OE57TT with PID 9188 (E:\spring_workspace\springsecurity-customAccessDecisionVoter-baseOnSpringboot\target\classes started by hp in E:\spring_workspace\springsecurity-customAccessDecisionVoter-baseOnSpringboot) 
+[INFO] 2018-08-31 18:44:16.495 [main] [org.springframework.boot.SpringApplication]637 - No active profile set, falling back to default profiles: default 
+[INFO] 2018-08-31 18:44:16.641 [main] [org.springframework.context.support.AbstractApplicationContext]582 - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@602e0143: startup date [Fri Aug 31 18:44:16 CST 2018]; root of context hierarchy 
+[INFO] 2018-08-31 18:44:17.146 [background-preinit] [org.hibernate.validator.internal.util.Version]30 - HV000001: Hibernate Validator 5.3.5.Final 
+[INFO] 2018-08-31 18:44:18.242 [main] [org.springframework.data.repository.config.RepositoryConfigurationDelegate]165 - Multiple Spring Data modules found, entering strict repository configuration mode! 
+[INFO] 2018-08-31 18:44:20.331 [main] [org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer]89 - Tomcat initialized with port(s): 8088 (http) 
+[INFO] 2018-08-31 18:44:20.363 [main] [org.apache.juli.logging.DirectJDKLog]179 - Starting service Tomcat 
+[INFO] 2018-08-31 18:44:20.368 [main] [org.apache.juli.logging.DirectJDKLog]179 - Starting Servlet Engine: Apache Tomcat/8.5.14 
+[INFO] 2018-08-31 18:44:20.721 [localhost-startStop-1] [org.apache.juli.logging.DirectJDKLog]179 - Initializing Spring embedded WebApplicationContext 
+[INFO] 2018-08-31 18:44:20.722 [localhost-startStop-1] [org.springframework.boot.context.embedded.EmbeddedWebApplicationContext]276 - Root WebApplicationContext: initialization completed in 4085 ms 
+[INFO] 2018-08-31 18:44:21.259 [localhost-startStop-1] [redis.clients.jedis.JedisSentinelPool]136 - Trying to find master from available Sentinels... 
+[INFO] 2018-08-31 18:44:21.298 [localhost-startStop-1] [redis.clients.jedis.JedisSentinelPool]185 - Redis master running at 192.168.13.62:6382, starting Sentinel listeners... 
+[INFO] 2018-08-31 18:44:21.314 [localhost-startStop-1] [redis.clients.jedis.JedisSentinelPool]127 - Created JedisPool to master at 192.168.13.62:6382 
+[INFO] 2018-08-31 18:44:21.501 [localhost-startStop-1] [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean]258 - Mapping filter: 'characterEncodingFilter' to: [/*] 
+[INFO] 2018-08-31 18:44:21.502 [localhost-startStop-1] [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean]258 - Mapping filter: 'springSessionRepositoryFilter' to: [/*] 
+[INFO] 2018-08-31 18:44:21.502 [localhost-startStop-1] [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean]258 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*] 
+[INFO] 2018-08-31 18:44:21.502 [localhost-startStop-1] [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean]258 - Mapping filter: 'httpPutFormContentFilter' to: [/*] 
+[INFO] 2018-08-31 18:44:21.502 [localhost-startStop-1] [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean]258 - Mapping filter: 'requestContextFilter' to: [/*] 
+[INFO] 2018-08-31 18:44:21.505 [localhost-startStop-1] [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean]258 - Mapping filter: 'springSecurityFilterChain' to: [/*] 
+[INFO] 2018-08-31 18:44:21.505 [localhost-startStop-1] [org.springframework.boot.web.servlet.AbstractFilterRegistrationBean]258 - Mapping filter: 'corsFilter' to: [/*] 
+[INFO] 2018-08-31 18:44:21.505 [localhost-startStop-1] [org.springframework.boot.web.servlet.ServletRegistrationBean]190 - Mapping servlet: 'dispatcherServlet' to [/] 

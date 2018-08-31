@@ -2,31 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3acf2c9-9089-48b2-a930-c9419c879746" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/controller/ResourceController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/controller/RoleController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/controller/UserController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/handler/UserLogoutSuccessHandler.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/controller/HandlerMethodController.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/springsecurity-customAccessDecisionVoter-baseOnSpringboot.iml" afterPath="$PROJECT_DIR$/springsecurity-customAccessDecisionVoter-baseOnSpringboot.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/Application.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/authority/RequestContext.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/authority/RequestContext.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/common/ErrorCode.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/common/ErrorCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/AuthUser.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/AuthUser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/UserDetailsServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/UserDetailsServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/UserInfo.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/UserInfo.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/WebSecurityConfig.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/WebSecurityConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/controller/BaseController.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/controller/BaseController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/dao/impl/LoginLogDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/dao/impl/LoginLogDaoImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/dao/impl/ResourceDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/dao/impl/ResourceDaoImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/handler/UserAuthenticationSuccessHandler.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/handler/UserAuthenticationSuccessHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/security/CustomAccessDecisionVoter.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/security/CustomAccessDecisionVoter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/security/HttpForbiddenEntryPoint.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/security/HttpForbiddenEntryPoint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/service/impl/AccountServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/gwg/user/web/service/impl/AccountServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/com/gwg/user/web/mapper/RoleResourceMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/com/gwg/user/web/mapper/RoleResourceMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/index.html" afterPath="$PROJECT_DIR$/static/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/study.txt" afterPath="$PROJECT_DIR$/study.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebSecurityConfig.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WebSecurityConfig.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/WebSecurityConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="64" column="12" lean-forward="false" selection-start-line="64" selection-start-column="12" selection-end-line="64" selection-end-column="12" />
+            <state relative-caret-position="67">
+              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2324#2325#0" expanded="true" />
@@ -92,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CorsConfig.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CorsConfig.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/CorsConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="17" column="84" lean-forward="false" selection-start-line="17" selection-start-column="53" selection-end-line="17" selection-end-column="84" />
+            <state relative-caret-position="292">
+              <caret line="24" column="69" lean-forward="false" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -232,8 +208,8 @@
         <option value="$PROJECT_DIR$/static/index.html" />
         <option value="$PROJECT_DIR$/study.txt" />
         <option value="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/UserDetailsServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/WebSecurityConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/CorsConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/WebSecurityConfig.java" />
       </list>
     </option>
   </component>
@@ -851,20 +827,19 @@
       <workItem from="1535612628771" duration="1633000" />
       <workItem from="1535628843815" duration="9612000" />
       <workItem from="1535694014244" duration="1615000" />
-      <workItem from="1535698505235" duration="10088000" />
+      <workItem from="1535698505235" duration="10285000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22948000" />
+    <option name="totallyTimeSpent" value="23145000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3107438" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40991735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -885,7 +860,7 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20330578" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.6578512" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1384,18 +1359,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/WebSecurityConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="64" column="12" lean-forward="false" selection-start-line="64" selection-start-column="12" selection-end-line="64" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2324#2325#0" expanded="true" />
-            <element signature="e#2366#2367#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/SpringHttpSessionConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -1406,9 +1369,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/CorsConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="17" column="84" lean-forward="false" selection-start-line="17" selection-start-column="53" selection-end-line="17" selection-end-column="84" />
+        <state relative-caret-position="292">
+          <caret line="24" column="69" lean-forward="false" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gwg/user/web/configuration/WebSecurityConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2324#2325#0" expanded="true" />
+            <element signature="e#2366#2367#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

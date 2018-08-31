@@ -62,7 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		        //.antMatchers("/index.html").permitAll();// 访问index.html不要权限验证
 				.anyRequest().authenticated();// 其他所有路径都需要权限校验
 
-        http.cors().configurationSource()
 		http.csrf().disable();// 默认开启，这里先显式关闭
 		http.formLogin() // 内部注册 UsernamePasswordAuthenticationFilter
 				//.loginPage("/login.html") // 前后端分离项目，注释掉 配置使用自定义的表单登录页面地址
