@@ -1,0 +1,91 @@
+redis哨兵模式安装：https://www.cnblogs.com/freeton/p/9112757.html
+
+解压
+tar -zxvf redis-4.0.9.tar.gz
+编译
+make
+安装到指定目录/opt/redis
+make PREFIX=/opt/redis/ install
+
+为了后续方面使用命令，可以把bin文件夹放到环境变量中，也可以把这几个命令连接到/usr/local/bin中，我采用后者
+ln -s /opt/redis/bin/redis-server /usr/local/bin/redis-server
+ln -s /opt/redis/bin/redis-benchmark /usr/local/bin/redis-benchmark
+ln -s /opt/redis/bin/redis-check-aof /usr/local/bin/redis-check-aof
+ln -s /opt/redis/bin/redis-check-rdb /usr/local/bin/redis-check-rdb
+ln -s /opt/redis/bin/redis-cli /usr/local/bin/redis-cli
+ln -s /opt/redis/bin/redis-sentinel /usr/local/bin/redis-sentinel
+
+
+Redis配置
+把解压redis中的配置文件redis-4.0.9/redis.conf复制到/opt/redis/conf文件夹中，修改配置
+下面说一下单机中哨兵HA的配置
+　　哨兵模式中至少需要三个redis节点启用，一个主节点，两个从节点，我们分别使用6379（主）、6380（从）、6381（从）端口启动三个redis服务。
+　　1、部署redis主从模式
+　　创建文件夹/data/redis/conf，把redis.conf 分别复制三份 redis_6379.conf、redis_6380.conf、redis_6381.conf，vi打开redis_6380.conf修改
+#端口
+port 6380
+#运行时
+pidfile /data/redis/run/redis_6380.pid
+#日至
+logfile /data/redis/log/redis_6380.log
+#数据
+dbfilename dump_6380.rdb
+#指定master
+slaveof 10.60.82.220 6379
+
+redis_6381.conf把端口改为6381，其他也做类似修改
+
+
+启动redis节点
+# redis-server redis_6379.conf &  //主服务
+启动redis从节点
+# redis-server redis_slave_6380.conf & //从服务
+# redis-server redis_slave_6381.conf & //从服务
+
+查看进程状态
+ps -ef | grep redis
+
+redis-cli -h 127.0.0.1 -p 6379
+
+说明：主库写入的数据会同步给从库， 从数据库一般是只读，可以改为可写，但写入的数据很容易被主同步没，所以还是只读就可以。
+
+
+3、配置sentinel
+　　把sentinel.conf 分别复制三份sentinel_26379.conf、sentinel_26380.conf、sentinel_26381.conf， 相关信息修改如下：
+#修改端口，3个文件分别为26379，26380，26381
+port 26379
+daemonize yes
+protected-mode no
+dir "/opt/redis/log/"
+
+#指定master
+sentinel monitor mymaster 192.168.1.107 6379 2
+sentinel down-after-milliseconds mymaster 50000
+sentinel failover-timeout mymaster 15000
+sentinel parallel-syncs mymaster 1
+#sentinel auth-pass mymaster YKHykh123456
+
+#注意这里不要使用127.0.0.1，否者java客户端可能链接不上
+sentinel known-slave mymaster 192.168.1.107 6380
+sentinel known-slave mymaster 192.168.1.107 6381
+#sentinel current-epoch 1
+
+
+4、启动sentinel服务
+# redis-sentinel sentinel_26379.conf &
+# redis-sentinel sentinel_26380.conf &
+# redis-sentinel sentinel_26381.conf &
+
+
+5、检查sentinel
+# redis-cli -h 10.60.82.220 -p 26379 //登陆服务
+> sentinel masters  //查看主服务信息
+> sentinel slaves mymaster //查看所有从服务信息
+
+
+关于java 客户端链接不上redis的解决方案
+https://blog.csdn.net/qq_33530388/article/details/72854642
+
+
+问题：
+虚拟机连不上主机？ 可能是主机防火墙的问题
