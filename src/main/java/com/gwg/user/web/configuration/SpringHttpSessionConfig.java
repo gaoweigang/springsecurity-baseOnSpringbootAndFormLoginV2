@@ -25,7 +25,7 @@ public class SpringHttpSessionConfig {
     public SessionRepository<?> sessionRepository(RedisConnectionFactory redisConnectionFactory) {
         RedisOperationsSessionRepository redisSessionRepository = 
                 new RedisOperationsSessionRepository(redisConnectionFactory);
-        redisSessionRepository.setDefaultMaxInactiveInterval(60);//设置Redis中HttpSession过期时间，默认是1800秒，测试使用60秒
+        redisSessionRepository.setDefaultMaxInactiveInterval(60 * 1000);//设置Redis中HttpSession过期时间，默认是1800秒，测试使用60秒
         redisSessionRepository.setRedisKeyNamespace("student");
         return redisSessionRepository;
     }

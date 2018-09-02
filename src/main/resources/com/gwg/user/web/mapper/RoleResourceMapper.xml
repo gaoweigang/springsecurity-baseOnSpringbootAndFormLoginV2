@@ -195,4 +195,16 @@
     GROUP BY t1.id
     ORDER BY t1.sort ASC
   </select>
+  <select id="queryAllowedRolesByUrl" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT
+    t1.role_code
+    FROM
+    tbl_role t1
+    INNER JOIN tbl_role_resource t2 ON t1.role_code = t2.role_code
+    INNER JOIN tbl_resource t3 ON t2.res_code = t3.res_code
+    WHERE
+    t1.valid_flag = 1
+    AND t3.valid_flag = 1
+    and t3.res_url = #{url,jdbcType=VARCHAR}
+  </select>
 </mapper>

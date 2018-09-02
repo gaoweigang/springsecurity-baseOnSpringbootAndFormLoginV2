@@ -15,6 +15,8 @@ public class AuthorityManager {
 	//通过uri获取访问该uri所需要的角色
    public Set<String> getAllowedRolesByUrl(String url) {
        Set<String> hashSet = new HashSet<String>();
+       hashSet.add("MARKET");
+       hashSet.add("XLOAN");
        return hashSet;
    }
 

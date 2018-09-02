@@ -1,40 +1,22 @@
 package com.gwg.user.web.configuration;
 
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
 
 /**
- *
+ * SpringSecuity提供的User只能记录用户名和密码
+ * 如果满足不了需求，可以进行扩展
  */
-@Data
-public class AuthUser implements Serializable{
-	private Long id;
+public class AuthUser extends User{
 
-	private String userId;
-
-	//密码
-	private String password;
-
-	private String username;
-
-	private String sex;
-
-	private Date birthday;
-
-	private String cardNo;
-
-	private String email;
-
-	private String mobile;
-
-	private String position;
-
-    private Set<String> roles;
+	public AuthUser(String username, String password, boolean enabled,
+                    boolean accountNonExpired, boolean credentialsNonExpired,
+                    boolean accountNonLocked,
+                    Collection<? extends GrantedAuthority> authorities) {
+		super(username, password, enabled, accountNonExpired, credentialsNonExpired,
+				accountNonLocked, authorities);
+	}
 
 }

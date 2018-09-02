@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.gwg.user.web.common.Result;
 
 /**
+ * 若匿名访问受限资源，则提示用户没登录
  * 当用户请求了一个受保护的资源，但是用户没通过认证，那么抛出异常
  */
 public class HttpForbiddenEntryPoint implements AuthenticationEntryPoint {
@@ -29,8 +30,8 @@ public class HttpForbiddenEntryPoint implements AuthenticationEntryPoint {
             , AuthenticationException authException) throws IOException, ServletException {
         writeCrosInfo(response);
         logger.info("登录异常：{}" + authException);
-        Result<String> result = new Result<String>();
-        if (authException instanceof UsernameNotFoundException) {
+        Result<String> result = new Result<String>(false, "610", "用户未登录！", null);
+        /*if (authException instanceof UsernameNotFoundException) {
             result = Result.error("610", "用户名或者密码不存在");
         } else if (authException instanceof BadCredentialsException) {
             result = Result.error("610", "用户名或者密码不存在");
@@ -40,7 +41,7 @@ public class HttpForbiddenEntryPoint implements AuthenticationEntryPoint {
             result = Result.error("610", "用户名或者密码不存在");
         } else {
             result = Result.error("610", "登录失败");
-        }
+        }*/
         JSON.writeJSONString(response.getWriter(), result);
     }
 
@@ -50,6 +51,7 @@ public class HttpForbiddenEntryPoint implements AuthenticationEntryPoint {
         response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
         response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
         response.setHeader("Access-Control-Max-Age", "3600");
     }
 

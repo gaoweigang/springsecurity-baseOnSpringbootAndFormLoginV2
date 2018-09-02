@@ -5,11 +5,8 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.gwg.user.web.common.ErrorCode;
 import com.gwg.user.web.common.Result;
-import com.gwg.user.web.configuration.AuthUser;
-import com.gwg.user.web.dto.LoginDto;
 import com.gwg.user.web.dto.UserDto;
 import com.gwg.user.web.exception.BusinessException;
-import com.gwg.user.web.model.User;
 import com.gwg.user.web.service.LoginLogService;
 import com.gwg.user.web.service.UserRoleService;
 import com.gwg.user.web.service.UserService;
@@ -26,8 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.security.auth.Subject;
 
 /**
  * Home redirection to swagger api documentation

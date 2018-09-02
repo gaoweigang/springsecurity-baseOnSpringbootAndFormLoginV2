@@ -19,9 +19,12 @@ import org.springframework.security.access.vote.UnanimousBased;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -41,6 +44,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private static Logger logger = LoggerFactory
 			.getLogger(WebSecurityConfig.class);
 
+	//对密码进行加密和解密的工具类
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 	@Bean
 	public UserDetailsService userDetailsService() {
 		return new UserDetailsServiceImpl();
@@ -51,18 +60,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService());
 	}
 
-	@Override
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/swagger-ui.html","/webjars/**","/swagger-resources/**","/v2/**");
+    }
+
+    @Override
 	protected void configure(HttpSecurity http) throws Exception {
 		logger.info("配置spring security start ....");
 		// UsernamePasswordAuthenticationFilter
 		http.authorizeRequests()
-				.antMatchers("/login").permitAll()
+				/*********任何人都可以访问的url start *******************************/
+				.antMatchers("/login").permitAll() //
+				/*********任何人都可以访问的url end *******************************/
+				/*********配置需要资源权限访问的路径 start***************************/
 		        .accessDecisionManager(accessDecisionManager())//配置投票系统
-		        //.antMatchers("/success.html").hasRole("ADMIN") //设置访问success.html页面需要拥有ROLE_ADMIN角色,这个可以配置到数据库里面，使用自定义的投票器来处理
+				/*********配置需要资源权限访问的路径 end***************************/
+				//.antMatchers("/success.html").hasRole("ADMIN") //设置访问success.html页面需要拥有ROLE_ADMIN角色,这个可以配置到数据库里面，使用自定义的投票器来处理
 		        //.antMatchers("/index.html").permitAll();// 访问index.html不要权限验证
 				.anyRequest().authenticated();// 其他所有路径都需要权限校验
 
-		http.csrf().disable();// 默认开启，这里先显式关闭
+		http.csrf().disable();// 取消跨站请求伪造防护 默认开启，这里先显式关闭
 		http.formLogin() // 内部注册 UsernamePasswordAuthenticationFilter
 				//.loginPage("/login.html") // 前后端分离项目，注释掉 配置使用自定义的表单登录页面地址
 				.loginProcessingUrl("/login")// form表单POST请求url提交地址，默认为/login
@@ -99,13 +117,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		    .maximumSessions(1)////只允许一个用户登录,如果同一个账户两次登录,那么第一个账户将被踢下线,跳转到登录页面  
 		    .expiredUrl("/login.html");//session失效后跳转 
 
+		/**
+		 * 参考：https://blog.csdn.net/jkjkjkll/article/details/79975975
+		 * AccessDeineHandler 用来解决认证过的用户访问无权限资源时的异常
+		 * AuthenticationEntryPoint 用来解决匿名用户访问无权限资源时的异常，比如：匿名无权访问，可以让它访问到登录页面
+		 */
 		//认证异常处理
 		http.exceptionHandling()
-				.authenticationEntryPoint(httpForbiddenEntryPoint())//当用户请求了一个受保护的资源，但是用户没通过认证，那么抛出异常
 				.accessDeniedHandler(accessDeniedHandler())
+				.authenticationEntryPoint(httpForbiddenEntryPoint())//当用户请求了一个受保护的资源，但是用户没通过认证，那么抛出异常
 				.accessDeniedPage("/deny.html");//配置访问拒绝页面
 
-		// 登出
+		// 登出成
 		http.logout()
 				.deleteCookies("JSESSIONID") //从cookie中删除JSESSIONID
 				.invalidateHttpSession(true) //配置在登出的时候，使HttpSession无效

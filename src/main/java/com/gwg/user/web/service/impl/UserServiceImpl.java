@@ -1,7 +1,6 @@
 package com.gwg.user.web.service.impl;
 
 import com.github.pagehelper.PageInfo;
-import com.gwg.user.web.configuration.AuthUser;
 import com.gwg.user.web.dao.AccountDao;
 import com.gwg.user.web.dao.UserDao;
 import com.gwg.user.web.dao.UserRoleDao;
@@ -40,20 +39,6 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserByUserId(userId);
 	}
 
-	public AuthUser getAuthUserByUserId(String userId) {
-		AuthUser authUser = new AuthUser();
-		User user = userDao.getUserByUserId(userId);
-		if(user == null){
-			return null;
-		}
-		Account account = accountDao.queryAccountByUserId(userId);
-		if(account ==null){
-			return null;
-		}
-		BeanUtils.copyProperties(user, authUser);
-		authUser.setPassword(account.getPassword());
-		return authUser;
-	}
 
 	public PageInfo<UserVo> queryUserInfoByLimit(UserDto dto) throws BusinessException {
 		return userDao.queryUserInfoByLimit(dto);

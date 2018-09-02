@@ -36,6 +36,13 @@ public class UserDto {
     //入职时间
     private Date entryTime;
 
+    private Date entryStartDate;
+
+    private Date entryEndDate;
+
+    //状态：是否在职
+    private String status;
+
     //角色
     private String roleCode;
 

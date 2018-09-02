@@ -1,7 +1,6 @@
 package com.gwg.user.web.service;
 
 import com.github.pagehelper.PageInfo;
-import com.gwg.user.web.configuration.AuthUser;
 import com.gwg.user.web.dto.UserDto;
 import com.gwg.user.web.exception.BusinessException;
 import com.gwg.user.web.model.User;
@@ -18,11 +17,6 @@ public interface UserService{
      * @return
      */
     public User getUserByUserId(String userId);
-
-    /**
-     * 根据用户名得到用户认证信息
-     */
-    public AuthUser getAuthUserByUserId(String userId);
 
 
     /**

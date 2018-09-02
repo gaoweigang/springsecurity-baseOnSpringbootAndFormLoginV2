@@ -43,5 +43,10 @@ public class RoleResourceDaoImpl implements RoleResourceDao{
         return roleResourceMapper.insertSelective(roleResource) > 0;
     }
 
+    public List<String> queryAllowedRolesByUrl(String url) throws BusinessException{
+        return roleResourceMapper.queryAllowedRolesByUrl(url);
+    }
+
+
 
 }

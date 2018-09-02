@@ -33,4 +33,6 @@ public interface RoleResourceMapper {
 
     public List<Resource> queryResourceListByRoleId(RoleDto dto) throws BusinessException;
 
+    public List<String> queryAllowedRolesByUrl(String url) throws BusinessException;
+
 }

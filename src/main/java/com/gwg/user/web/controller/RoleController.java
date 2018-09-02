@@ -11,6 +11,7 @@ import com.gwg.user.web.model.Role;
 import com.gwg.user.web.service.RoleService;
 import com.gwg.user.web.util.ParamUtil;
 import com.gwg.user.web.vo.RoleVo;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping({ "/role" })
+@Api(value = "roleController", tags = "角色管理")
 public class RoleController {
 
 	private static final Logger logger = LoggerFactory.getLogger(RoleController.class);

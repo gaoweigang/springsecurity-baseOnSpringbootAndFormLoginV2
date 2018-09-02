@@ -6,6 +6,7 @@ import com.gwg.user.web.common.Result;
 import com.gwg.user.web.exception.BusinessException;
 import com.gwg.user.web.model.Resource;
 import com.gwg.user.web.service.ResourceService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping({ "/resource" })
+@Api(value = "resourceController", tags = "资源管理")
 public class ResourceController extends BaseController{
 
 	private static final Logger logger = LoggerFactory.getLogger(ResourceController.class);
@@ -51,7 +53,7 @@ public class ResourceController extends BaseController{
 	public Result queryCurrentUserMenu(){
 
 		try {
-			List<Resource> resourceList = resourceService.queryCurrentUserMenu(this.getCurrentUserId());
+			List<Resource> resourceList = resourceService.queryCurrentUserMenu(this.getCurrentUsername());
 			return new Result(true,  ErrorCode.S200.statusCode(), ErrorCode.S200.message(), resourceList);
 		} catch (Exception e) {
 			logger.error("异常:{}", e.getMessage());

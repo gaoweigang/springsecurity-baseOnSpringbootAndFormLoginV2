@@ -11,3 +11,15 @@ AffirmativeBased
 ConsensusBased 基于共识
 UnanimousBased
 http://blog.csdn.net/honghailiang888/article/details/53925514
+
+
+4.浏览器同步测试工具：browser-sync
+Browsersync能让浏览器实时、快速响应您的文件更改（html、js、css、sass、less等）并自动刷新页面
+安装：npm install -g browser-sync
+使用：browser-sync start --server --files "*.html"
+
+
+接口文档地址：http://localhost:8088/swagger-ui.html
+
+5.Springsecurity集成swagger2
+http://www.360doc.com/content/17/0322/10/31406094_639093919.shtml

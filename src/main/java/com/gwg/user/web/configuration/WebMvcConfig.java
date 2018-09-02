@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * WebMvcConfigureAdapter该抽象类里面其实没有任何的方法实现，只是空实现了接口WebMvcConfigurer内的全部方法，并没有给出任何的业务
  * 逻辑处理
  */
-@Configuration
+//@Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		
 	

@@ -2,9 +2,8 @@ package com.gwg.user.web.controller;
 
 import com.gwg.user.web.common.ErrorCode;
 import com.gwg.user.web.common.Result;
-import com.gwg.user.web.configuration.AuthUser;
-import com.gwg.user.web.dto.UserDto;
 import com.gwg.user.web.authority.RequestContext;
+import com.gwg.user.web.configuration.AuthUser;
 
 
 public class BaseController {
@@ -34,16 +33,9 @@ public class BaseController {
         return getRequestContext().getAuthUser();
     }
 
-    protected String getCurrentUserId() {
-    	AuthUser authUser = getCurrentUser();
-        if (null != authUser) {
-            return authUser.getUserId();
-        }
-        return null;
-    }
 
     protected String getCurrentUsername() {
-    	AuthUser authUser = getCurrentUser();
+        AuthUser authUser = getCurrentUser();
         if (null != authUser) {
             return authUser.getUsername();
         }

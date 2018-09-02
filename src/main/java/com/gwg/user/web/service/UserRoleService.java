@@ -17,6 +17,6 @@ public interface UserRoleService {
 	/**
 	 *根据用户ID获取用户角色
 	 */
-	public List<String> getRoleListByUserid(String userid);
+	public List<String> queryRoleListByUserid(String userid);
 
 }

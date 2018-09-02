@@ -32,7 +32,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 	/**
 	 *根据userid获取用户角色
 	 */
-	public List<String> getRoleListByUserid(String userid){
+	public List<String> queryRoleListByUserid(String userid){
 		return userRoleDao.queryRoleListByUserid(userid);
 	}
 }

@@ -17,5 +17,7 @@ public interface RoleResourceDao {
 
     public boolean addRoleResource(String roleCode, String resCode) throws BusinessException;
 
+    public List<String> queryAllowedRolesByUrl(String url) throws BusinessException;
+
 
 }
