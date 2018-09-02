@@ -18,6 +18,9 @@ import com.gwg.user.web.common.Result;
 import com.gwg.user.web.util.SessionUtil;
 import com.gwg.user.web.security.HttpForbiddenEntryPoint;
 
+/**
+ * 当用户认证通过后，访问用户没有权限的资源处理
+ */
 public class UserAccessDeniedHandler implements AccessDeniedHandler {
 	
 	private static Logger logger = LoggerFactory.getLogger(UserAccessDeniedHandler.class);
