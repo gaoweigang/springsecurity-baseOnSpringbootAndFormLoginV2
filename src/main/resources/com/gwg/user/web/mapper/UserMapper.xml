@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gwg.user.web.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.gwg.user.web.model.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="staff_code" property="staffCode" jdbcType="VARCHAR" />
+    <result column="errpwdcount" property="errpwdcount" jdbcType="BIT" />
+    <result column="lastlogintime" property="lastlogintime" jdbcType="TIMESTAMP" />
+    <result column="lastupdatepwdtime" property="lastupdatepwdtime" jdbcType="TIMESTAMP" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="start_date" property="startDate" jdbcType="TIMESTAMP" />
+    <result column="stop_date" property="stopDate" jdbcType="TIMESTAMP" />
+    <result column="user_status" property="userStatus" jdbcType="VARCHAR" />
+    <result column="valid_flag" property="validFlag" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="modifier" property="modifier" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, username, staff_code, errpwdcount, lastlogintime, lastupdatepwdtime, password, 
+    start_date, stop_date, user_status, valid_flag, create_time, modify_time, creator, 
+    modifier, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gwg.user.web.model.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tbl_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.gwg.user.web.model.User" >
+    insert into tbl_user (id, username, staff_code, 
+      errpwdcount, lastlogintime, lastupdatepwdtime, 
+      password, start_date, stop_date, 
+      user_status, valid_flag, create_time, 
+      modify_time, creator, modifier, 
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{staffCode,jdbcType=VARCHAR}, 
+      #{errpwdcount,jdbcType=BIT}, #{lastlogintime,jdbcType=TIMESTAMP}, #{lastupdatepwdtime,jdbcType=TIMESTAMP}, 
+      #{password,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP}, #{stopDate,jdbcType=TIMESTAMP}, 
+      #{userStatus,jdbcType=VARCHAR}, #{validFlag,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gwg.user.web.model.User" >
+    insert into tbl_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="staffCode != null" >
+        staff_code,
+      </if>
+      <if test="errpwdcount != null" >
+        errpwdcount,
+      </if>
+      <if test="lastlogintime != null" >
+        lastlogintime,
+      </if>
+      <if test="lastupdatepwdtime != null" >
+        lastupdatepwdtime,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="startDate != null" >
+        start_date,
+      </if>
+      <if test="stopDate != null" >
+        stop_date,
+      </if>
+      <if test="userStatus != null" >
+        user_status,
+      </if>
+      <if test="validFlag != null" >
+        valid_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="staffCode != null" >
+        #{staffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errpwdcount != null" >
+        #{errpwdcount,jdbcType=BIT},
+      </if>
+      <if test="lastlogintime != null" >
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatepwdtime != null" >
+        #{lastupdatepwdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopDate != null" >
+        #{stopDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null" >
+        #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="validFlag != null" >
+        #{validFlag,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gwg.user.web.model.UserExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffCode != null" >
+        staff_code = #{record.staffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errpwdcount != null" >
+        errpwdcount = #{record.errpwdcount,jdbcType=BIT},
+      </if>
+      <if test="record.lastlogintime != null" >
+        lastlogintime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastupdatepwdtime != null" >
+        lastupdatepwdtime = #{record.lastupdatepwdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null" >
+        start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stopDate != null" >
+        stop_date = #{record.stopDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userStatus != null" >
+        user_status = #{record.userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validFlag != null" >
+        valid_flag = #{record.validFlag,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creator != null" >
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifier != null" >
+        modifier = #{record.modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tbl_user
+    set id = #{record.id,jdbcType=BIGINT},
+      username = #{record.username,jdbcType=VARCHAR},
+      staff_code = #{record.staffCode,jdbcType=VARCHAR},
+      errpwdcount = #{record.errpwdcount,jdbcType=BIT},
+      lastlogintime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      lastupdatepwdtime = #{record.lastupdatepwdtime,jdbcType=TIMESTAMP},
+      password = #{record.password,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=TIMESTAMP},
+      stop_date = #{record.stopDate,jdbcType=TIMESTAMP},
+      user_status = #{record.userStatus,jdbcType=VARCHAR},
+      valid_flag = #{record.validFlag,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      modifier = #{record.modifier,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gwg.user.web.model.User" >
+    update tbl_user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="staffCode != null" >
+        staff_code = #{staffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errpwdcount != null" >
+        errpwdcount = #{errpwdcount,jdbcType=BIT},
+      </if>
+      <if test="lastlogintime != null" >
+        lastlogintime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatepwdtime != null" >
+        lastupdatepwdtime = #{lastupdatepwdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        start_date = #{startDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopDate != null" >
+        stop_date = #{stopDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userStatus != null" >
+        user_status = #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="validFlag != null" >
+        valid_flag = #{validFlag,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gwg.user.web.model.User" >
+    update tbl_user
+    set username = #{username,jdbcType=VARCHAR},
+      staff_code = #{staffCode,jdbcType=VARCHAR},
+      errpwdcount = #{errpwdcount,jdbcType=BIT},
+      lastlogintime = #{lastlogintime,jdbcType=TIMESTAMP},
+      lastupdatepwdtime = #{lastupdatepwdtime,jdbcType=TIMESTAMP},
+      password = #{password,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=TIMESTAMP},
+      stop_date = #{stopDate,jdbcType=TIMESTAMP},
+      user_status = #{userStatus,jdbcType=VARCHAR},
+      valid_flag = #{validFlag,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--####################一对多关联查询######################################################################-->
+  <resultMap id="UserInfoMap" type="com.gwg.user.web.vo.UserVo" >
+    <result column="userId" property="userId"/>
+    <result column="password" property="password"/>
+    <result column="staffCode" property="staffCode"/>
+    <result column="staffName" property="staffName"/>
+    <result column="position" property="position"/>
+    <collection property="roleCodeList" ofType="java.lang.String">
+      <result column="roleCode" property="roleCode"/>
+    </collection>
+  </resultMap>
+
+  <select id="queryUserDetailByUsrename" resultMap="UserInfoMap">
+    SELECT
+    t1.username as username,
+    t1.password as password,
+    t2.staff_code as staffCode,
+    t2.staff_name as staffName,
+    t4.role_code as roleCode
+    FROM
+    tbl_user t1
+    INNER JOIN tbl_staff t2 ON t1.staff_code = t2.staff_code
+    INNER JOIN tbl_user_role t3 ON t1.staff_code = t3.staff_code
+    INNER JOIN tbl_role t4 on t3.role_code = t4.role_code
+    <where>
+      t1.valid_flag = '1'
+      and t2.valid_flag = '1'
+      and t4.valid_flag = '1'
+      <if test="username != null" >
+        and t1.username = #{username,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+
+  <select id="queryUserInfoByLimit" parameterType="java.lang.String" resultMap="UserInfoMap">
+    SELECT
+    t1.username as username,
+    t2.staff_code as staffCode,
+    t2.staff_name as staffName,
+    t2.position as position,
+    t4.role_code as roleCode
+    FROM
+    tbl_user t1
+    INNER JOIN tbl_staff t2 ON t1.staff_code = t2.staff_code
+    INNER JOIN tbl_user_role t3 ON t1.staff_code = t3.staff_code
+    INNER JOIN tbl_role t4 on t3.role_code = t4.role_code
+    <where>
+      t1.valid_flag = '1'
+      and t2.valid_flag = '1'
+      and t4.valid_flag = '1'
+      <if test="userId != null" >
+        and t1.username = #{username,jdbcType=VARCHAR}
+      </if>
+      <if test="staffCode != null" >
+        and t1.staffCode = #{staffCode,jdbcType=VARCHAR}
+      </if>
+      <if test="cardNo != null" >
+        and t2.card_no = #{cardNo,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile != null" >
+        and t2.mobile = #{mobile,jdbcType=VARCHAR}
+      </if>
+      <if test="entryStartDate != null and entryEndDate != null " >
+        and t2.entry_time BETWEEN #{entryStartDate,jdbcType=VARCHAR} and #{entryEndDate,jdbcType=VARCHAR}
+      </if>
+      <if test="roleCode != null" >
+        and t4.role_code = #{roleCode,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null" >
+        and t2.status = #{status,jdbcType=BIT}
+      </if>
+    </where>
+  </select>
+</mapper>

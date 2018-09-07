@@ -5,29 +5,25 @@ import java.util.Date;
 public class User {
     private Long id;
 
-    private String userId;
-
     private String username;
 
-    private String sex;
+    private String staffCode;
 
-    private Date birthday;
+    private Boolean errpwdcount;
 
-    private String cardNo;
+    private Date lastlogintime;
 
-    private String email;
+    private Date lastupdatepwdtime;
 
-    private String mobile;
+    private String password;
 
-    private String position;
+    private Date startDate;
 
-    private Boolean status;
+    private Date stopDate;
+
+    private String userStatus;
 
     private Boolean validFlag;
-
-    private Date entryTime;
-
-    private Date resignTime;
 
     private Date createTime;
 
@@ -47,14 +43,6 @@ public class User {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
-
     public String getUsername() {
         return username;
     }
@@ -63,60 +51,68 @@ public class User {
         this.username = username == null ? null : username.trim();
     }
 
-    public String getSex() {
-        return sex;
+    public String getStaffCode() {
+        return staffCode;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+    public void setStaffCode(String staffCode) {
+        this.staffCode = staffCode == null ? null : staffCode.trim();
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public Boolean getErrpwdcount() {
+        return errpwdcount;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setErrpwdcount(Boolean errpwdcount) {
+        this.errpwdcount = errpwdcount;
     }
 
-    public String getCardNo() {
-        return cardNo;
+    public Date getLastlogintime() {
+        return lastlogintime;
     }
 
-    public void setCardNo(String cardNo) {
-        this.cardNo = cardNo == null ? null : cardNo.trim();
+    public void setLastlogintime(Date lastlogintime) {
+        this.lastlogintime = lastlogintime;
     }
 
-    public String getEmail() {
-        return email;
+    public Date getLastupdatepwdtime() {
+        return lastupdatepwdtime;
     }
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+    public void setLastupdatepwdtime(Date lastupdatepwdtime) {
+        this.lastupdatepwdtime = lastupdatepwdtime;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 
-    public String getPosition() {
-        return position;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setPosition(String position) {
-        this.position = position == null ? null : position.trim();
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Date getStopDate() {
+        return stopDate;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setStopDate(Date stopDate) {
+        this.stopDate = stopDate;
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus == null ? null : userStatus.trim();
     }
 
     public Boolean getValidFlag() {
@@ -125,22 +121,6 @@ public class User {
 
     public void setValidFlag(Boolean validFlag) {
         this.validFlag = validFlag;
-    }
-
-    public Date getEntryTime() {
-        return entryTime;
-    }
-
-    public void setEntryTime(Date entryTime) {
-        this.entryTime = entryTime;
-    }
-
-    public Date getResignTime() {
-        return resignTime;
-    }
-
-    public void setResignTime(Date resignTime) {
-        this.resignTime = resignTime;
     }
 
     public Date getCreateTime() {

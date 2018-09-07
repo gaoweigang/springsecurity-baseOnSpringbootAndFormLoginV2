@@ -1,8 +1,8 @@
 --创建数据dev
-CREATE DATABASE zkmkt;
+CREATE DATABASE test;
 
 --切换到数据库dev
-USE zkmkt;
+USE test;
 
 --查看当前正在使用的数据库
 select DATABASE();
@@ -10,6 +10,7 @@ select DATABASE();
 --查看当前库中存在哪些表
 show tables;
 
+drop table tbl_login_log
 --创建表
 --登陆日志表
 create table `tbl_login_log` (
@@ -20,8 +21,7 @@ create table `tbl_login_log` (
   `server_ip` varchar(64) default null comment '服务器ip',
   `server_port` varchar(64) default null comment '服务器端口',
   `service_id` varchar(64) default null comment '服务系统 0 业务系统 1支撑系统',
-  `user_id` varchar(64) default null comment '用户id',
-  `username` varchar(64) default null comment '用户姓名',
+  `username` varchar(64) default null comment '用户名',
    create_time timestamp NULL DEFAULT NULL comment '创建时间',
    modify_time timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
    creator varchar(32) default null comment '创建人',
@@ -30,10 +30,32 @@ create table `tbl_login_log` (
   primary key (`id`)
 ) engine=innodb default charset=utf8 comment='登陆信息表';
 
+--用户登陆信息表
+CREATE TABLE `tbl_user` (
+  `id` bigint(32) not null auto_increment comment '主键',
+  `username` varchar(20) not null comment '用户登录id',
+   staff_code varchar(40) default null comment '员工编号',
+  `errpwdcount` TINYINT(1) default null comment '密码连续错误次数',
+  `lastlogintime` timestamp null default null comment '最近成功登陆时间',
+  `lastupdatepwdtime` timestamp null default null comment '最近密码更换时间',
+  `password` varchar(20) default null comment '密码',
+  `start_date` timestamp null default null comment '用户起用日期',
+  `stop_date` timestamp null default null comment '用户停用日期',
+  `user_status` varchar(1) default null comment '用户当前状态(0：正常，1：密码过期，2：账户已冻结，3：已销户)',
+  `valid_flag` TINYINT(1) not null default '1' comment '有效标志 1：有效，0：无效 表示停用',
+   create_time timestamp NULL DEFAULT NULL comment '创建时间',
+   modify_time timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+   creator varchar(32) default null comment '创建人',
+   modifier varchar(32) default null comment '修改人',
+   remark varchar(255) default null comment '描述',
+  primary key (`id`),
+  unique key `unique_username` (`username`) using btree
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录信息表';
+
 --用户角色关联表
-CREATE TABLE `tbl_account_role` (
+CREATE TABLE `tbl_user_role` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `user_id` varchar(20) DEFAULT NULL COMMENT '角色id',
+  `staff_code` varchar(20) DEFAULT NULL COMMENT '角色id',
   `role_code` varchar(20) DEFAULT NULL COMMENT '角色编码',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
@@ -80,27 +102,6 @@ CREATE TABLE `tbl_resource` (
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='资源表';
 
 
---用户登陆信息表
-CREATE TABLE `tbl_account` (
-  `id` bigint(32) not null auto_increment comment '主键',
-  `user_id` varchar(20) not null comment '用户登录id',
-   staff_code varchar(40) default null comment '员工编号',
-  `errpwdcount` TINYINT(1) default null comment '密码连续错误次数',
-  `lastlogintime` timestamp null default null comment '最近成功登陆时间',
-  `lastupdatepwdtime` timestamp null default null comment '最近密码更换时间',
-  `password` varchar(20) default null comment '密码',
-  `start_date` timestamp null default null comment '用户起用日期',
-  `stop_date` timestamp null default null comment '用户停用日期',
-  `user_status` varchar(1) default null comment '用户当前状态(0：正常，1：密码过期，2：账户已冻结，3：已销户)',
-  `valid_flag` TINYINT(1) not null default '1' comment '有效标志 1：有效，0：无效 表示停用',
-   create_time timestamp NULL DEFAULT NULL comment '创建时间',
-   modify_time timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-   creator varchar(32) default null comment '创建人',
-   modifier varchar(32) default null comment '修改人',
-   remark varchar(255) default null comment '描述',
-  primary key (`id`),
-  unique key `unique_user_id` (`user_id`) using btree
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录信息表';
 
 drop table tbl_staff
 --人员信息表,仅仅是人员信息，公司在职人员并不一定可以登陆系统
@@ -123,28 +124,27 @@ create table `tbl_staff` (
    creator varchar(32) default null comment '创建人',
    modifier varchar(32) default null comment '修改人',
    remark varchar(255) default null comment '描述',
-  primary key (`id`),
-  unique key `unique_user_id` (`user_id`) using btree
+  primary key (`id`)
 ) engine=innodb default charset=utf8 comment='人员信息表';
 
 --查询表
 SELECT * from tbl_staff;
 --账号表
-SELECT * from tbl_account;
-SELECT * from tbl_account_role;
+SELECT * from tbl_user;
+SELECT * from tbl_user_role;
 SELECT * from tbl_role;
 SELECT * from tbl_role_resource;
 SELECT * from tbl_resource;
 SELECT * from tbl_login_log;
 
 
-INSERT INTO `tbl_login_log`(CLIENT_IP,LOGIN_TIME , LOGOUT_TIME,SERVER_IP,SERVER_PORT,SERVICE_ID,USER_ID,USERNAME) VALUES ( NULL, '2018-6-8 19:09:00', '2018-6-8 19:09:00', NULL, NULL, NULL, '00000013', '测试电销');
-INSERT INTO `tbl_login_log`(CLIENT_IP,LOGIN_TIME , LOGOUT_TIME,SERVER_IP,SERVER_PORT,SERVICE_ID,USER_ID,USERNAME) VALUES ( NULL, '2018-6-8 18:38:47', '2018-6-8 18:38:47', NULL, NULL, NULL, '00000012', '测试小强新');
+INSERT INTO `tbl_login_log`(CLIENT_IP,LOGIN_TIME , LOGOUT_TIME,SERVER_IP,SERVER_PORT,SERVICE_ID,USERNAME) VALUES ( NULL, '2018-6-8 19:09:00', '2018-6-8 19:09:00', NULL, NULL, NULL, '00000013');
+INSERT INTO `tbl_login_log`(CLIENT_IP,LOGIN_TIME , LOGOUT_TIME,SERVER_IP,SERVER_PORT,SERVICE_ID,USERNAME) VALUES ( NULL, '2018-6-8 18:38:47', '2018-6-8 18:38:47', NULL, NULL, NULL, '00000012');
 
 
-INSERT INTO `tbl_account_role`(user_id, role_code) VALUES ( '00000012', 'MARKET');
-INSERT INTO `tbl_account_role`(user_id, role_code) VALUES ( '00000013', 'XLOAN' );
-INSERT INTO `tbl_account_role`(user_id, role_code) VALUES ( '00000014', 'ADMIN');
+INSERT INTO `tbl_user_role`(staff_code, role_code) VALUES ( 'HB0001', 'MARKET');
+INSERT INTO `tbl_user_role`(staff_code, role_code) VALUES ( 'HB0002', 'XLOAN' );
+INSERT INTO `tbl_user_role`(staff_code, role_code) VALUES ( 'HB0003', 'ADMIN');
 
 
 INSERT INTO `tbl_resource` VALUES (1,  'systemPage',              '系统组织管理','/systemPage', 1, 0, 0, 1, NULL, '2018-6-4 11:32:30', NULL, NULL, NULL);
@@ -164,7 +164,6 @@ INSERT INTO `tbl_resource` VALUES (16, 'nameIssued',               '名单下发
 INSERT INTO `tbl_resource` VALUES (17, 'Page',               '信审',   '/auditPage', 1, 0, 16, 1, NULL, '2018-6-4 11:34:53', NULL, NULL, NULL);
 INSERT INTO `tbl_resource` VALUES (18, 'tdScore',               '同盾跑分',   '/audit/tdScore', 1, 17, 17, 1, NULL, '2018-6-4 11:34:53', NULL, NULL, NULL);
 INSERT INTO `tbl_resource` VALUES (19,  'queryUserInfoById',                '根据UserId查询用户信息',    '/user/queryUserInfoByUserId', 2, 2, 5, 1, NULL, '2018-6-4 11:33:02', NULL, NULL, NULL);
-
 
 
 
@@ -201,9 +200,9 @@ INSERT INTO `tbl_staff`(staff_code, staff_name,SEX,birthday,card_no,EMAIL,MOBILE
 INSERT INTO `tbl_staff`(staff_code, staff_name,SEX,birthday,card_no,EMAIL,MOBILE,POSITION,VALID_FLAG,entry_time) VALUES ('HB0002', '曾宪洲', 0, '2018-3-12 16:40:00', '420881199101095179', '13817191469@163.com', '13817191469', '开发', 1, '2018-3-12 16:40:00');
 INSERT INTO `tbl_staff`(staff_code, staff_name,SEX,birthday,card_no,EMAIL,MOBILE,POSITION,VALID_FLAG,entry_time) VALUES ('HB0003', 'test', 0, '2018-3-12 16:40:00', '420881199101095179', '13817191469@163.com', '13817191469', '开发', 1, '2018-3-12 16:40:00');
 
-INSERT INTO `tbl_account`(user_id,staff_code, PASSWORD) VALUES ('00000012', 'HB0001', '1');
-INSERT INTO `tbl_account`(user_id,staff_code, PASSWORD) VALUES ('00000013', 'HB0002', '1');
-INSERT INTO `tbl_account`(user_id,staff_code, PASSWORD) VALUES ('00000014', 'HB0003', '1');
+INSERT INTO `tbl_user`(username,staff_code, PASSWORD) VALUES ('00000012', 'HB0001', '1');
+INSERT INTO `tbl_user`(username,staff_code, PASSWORD) VALUES ('00000013', 'HB0002', '1');
+INSERT INTO `tbl_user`(username,staff_code, PASSWORD) VALUES ('00000014', 'HB0003', '1');
 
 
 INSERT INTO `tbl_role` VALUES (1, 'MARKET', '市场', 1, '2018-5-3 13:26:32', '2018-5-3 13:26:32', NULL, NULL, NULL);

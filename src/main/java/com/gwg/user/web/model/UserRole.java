@@ -3,7 +3,7 @@ package com.gwg.user.web.model;
 public class UserRole {
     private Long id;
 
-    private String userId;
+    private String staffCode;
 
     private String roleCode;
 
@@ -15,12 +15,12 @@ public class UserRole {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getStaffCode() {
+        return staffCode;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setStaffCode(String staffCode) {
+        this.staffCode = staffCode == null ? null : staffCode.trim();
     }
 
     public String getRoleCode() {

@@ -8,7 +8,7 @@ public interface LoginLogDao {
     /**
      * 根据用户ID查询该用户登陆日志
      */
-    public LoginLog queryloginLogByUserid(String userid);
+    public LoginLog queryloginLogByUsername(String username);
 
     /**
      * 插入登陆日志

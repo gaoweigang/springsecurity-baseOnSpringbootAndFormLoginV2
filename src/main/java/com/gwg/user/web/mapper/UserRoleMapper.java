@@ -1,6 +1,5 @@
 package com.gwg.user.web.mapper;
 
-import com.gwg.user.web.exception.BusinessException;
 import com.gwg.user.web.model.UserRole;
 import com.gwg.user.web.model.UserRoleExample;
 import java.util.List;
@@ -25,6 +24,5 @@ public interface UserRoleMapper {
 
     int updateByPrimaryKey(UserRole record);
 
-    public List<String> queryRoleListByUserid(String userid) throws BusinessException;
-
+    List<String> queryRoleListByStaffCode(@Param("staffCode") String staffCode);
 }

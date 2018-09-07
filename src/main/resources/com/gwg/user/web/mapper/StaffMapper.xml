@@ -3,7 +3,6 @@
 <mapper namespace="com.gwg.user.web.mapper.StaffMapper" >
   <resultMap id="BaseResultMap" type="com.gwg.user.web.model.Staff" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="staff_code" property="staffCode" jdbcType="VARCHAR" />
     <result column="staff_name" property="staffName" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
@@ -81,8 +80,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, staff_code, staff_name, sex, birthday, card_no, email, mobile, position, 
-    status, valid_flag, entry_time, resign_time, create_time, modify_time, creator, modifier, 
+    id, staff_code, staff_name, sex, birthday, card_no, email, mobile, position, status, 
+    valid_flag, entry_time, resign_time, create_time, modify_time, creator, modifier, 
     remark
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gwg.user.web.model.StaffExample" >
@@ -106,29 +105,26 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
   <insert id="insert" parameterType="com.gwg.user.web.model.Staff" >
-    insert into tbl_staff (id, user_id, staff_code, 
-      staff_name, sex, birthday, 
-      card_no, email, mobile, 
-      position, status, valid_flag, 
-      entry_time, resign_time, create_time, 
-      modify_time, creator, modifier, 
-      remark)
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{staffCode,jdbcType=VARCHAR}, 
-      #{staffName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, 
-      #{cardNo,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{position,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{validFlag,jdbcType=BIT}, 
-      #{entryTime,jdbcType=TIMESTAMP}, #{resignTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{modifyTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR})
+    insert into tbl_staff (id, staff_code, staff_name, 
+      sex, birthday, card_no, 
+      email, mobile, position, 
+      status, valid_flag, entry_time, 
+      resign_time, create_time, modify_time, 
+      creator, modifier, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{staffCode,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, #{cardNo,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{status,jdbcType=BIT}, #{validFlag,jdbcType=BIT}, #{entryTime,jdbcType=TIMESTAMP}, 
+      #{resignTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.gwg.user.web.model.Staff" >
     insert into tbl_staff
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
-      </if>
-      <if test="userId != null" >
-        user_id,
       </if>
       <if test="staffCode != null" >
         staff_code,
@@ -185,9 +181,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=VARCHAR},
       </if>
       <if test="staffCode != null" >
         #{staffCode,jdbcType=VARCHAR},
@@ -254,9 +247,6 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=VARCHAR},
-      </if>
       <if test="record.staffCode != null" >
         staff_code = #{record.staffCode,jdbcType=VARCHAR},
       </if>
@@ -316,7 +306,6 @@
   <update id="updateByExample" parameterType="map" >
     update tbl_staff
     set id = #{record.id,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=VARCHAR},
       staff_code = #{record.staffCode,jdbcType=VARCHAR},
       staff_name = #{record.staffName,jdbcType=VARCHAR},
       sex = #{record.sex,jdbcType=VARCHAR},
@@ -341,9 +330,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.gwg.user.web.model.Staff" >
     update tbl_staff
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
       <if test="staffCode != null" >
         staff_code = #{staffCode,jdbcType=VARCHAR},
       </if>
@@ -400,8 +386,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.gwg.user.web.model.Staff" >
     update tbl_staff
-    set user_id = #{userId,jdbcType=VARCHAR},
-      staff_code = #{staffCode,jdbcType=VARCHAR},
+    set staff_code = #{staffCode,jdbcType=VARCHAR},
       staff_name = #{staffName,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=TIMESTAMP},
@@ -420,38 +405,4 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-
-
-  <!--####################一对多关联查询######################################################################-->
-  <resultMap id="StaffInfoMap" type="com.gwg.user.web.vo.StaffVo" >
-    <result column="userId" property="userId"/>
-    <result column="password" property="password"/>
-    <result column="staffCode" property="staffCode"/>
-    <result column="staffName" property="staffName"/>
-    <collection property="roleCodeList" ofType="java.lang.String">
-      <result column="roleCode" property="roleCode"/>
-    </collection>
-  </resultMap>
-
-  <select id="queryStaffInfo" parameterType="java.lang.String" resultMap="StaffInfoMap">
-    SELECT
-    t1.user_id as userId,
-    t1.password as password,
-    t2.staff_code as staffCode,
-    t2.staff_name as staffName,
-    t4.role_code as roleCode
-    FROM
-    tbl_account t1
-    INNER JOIN tbl_staff t2 ON t1.staff_code = t2.staff_code
-    INNER JOIN tbl_account_role t3 ON t1.user_id = t3.user_id
-    INNER JOIN tbl_role t4 on t3.role_code = t4.role_code
-    <where>
-      t1.valid_flag = '1'
-      and t2.valid_flag = '1'
-      and t4.valid_flag = '1'
-      <if test="userId != null" >
-        and t1.user_id = #{userId,jdbcType=VARCHAR}
-      </if>
-    </where>
-  </select>
 </mapper>

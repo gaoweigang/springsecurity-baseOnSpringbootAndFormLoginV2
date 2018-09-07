@@ -5,29 +5,21 @@
 <title>跨域测试：这是一个静态页面(注意：是静态页面)，不需要启动服务器，直接拖到浏览器即可访问 </title>
 <script src="./jquery.js"></script>
 <script type="text/javascript">
-function getUserInfoById(btn) {
-    var $btn = $(btn);
-    var userId = $btn.next('input').val();
-    if (!userId) {
-        $btn.next('input').next('p').html('userId不能为空');
-        return;
-    }
-    console.log("userId:"+userId);
+function queryAllResources(btn) {
     $.ajax({
-        type: 'post',
-        url: 'http://localhost:8088/user/queryUserInfoByUserId',
+        type: 'get',
+        url: 'http://localhost:8088/resource/queryAllResources',
         contentType: "application/json",  //如果改为 application/json ，则是复杂的跨域请求
-        data: "{\"userId\":\"" + userId + "\"}",
         dataType: 'json',
         xhrFields: {
             withCredentials: true
         }
     }).then(
             function (obj) {
-                $btn.next('input').next('p').html(JSON.stringify(obj));
+                $btn.next('input').html(JSON.stringify(obj));
             },
             function () {
-                $btn.next('input').next('p').html('error...');
+                $btn.next('input').html('error...');
             }
     )
 }
@@ -108,8 +100,7 @@ function login(btn) {
  <p color="blue"></p>
  <hr>
 
- <input type="button" value="复杂跨域：根据userid获取用户" onclick="getUserInfoById(this)">
- <input type="text" placeholder="用户id">
+ <input type="button" value="获取所有资源" onclick="queryAllResources(this)">
  <p style="color:red"></p>
  <hr>
 

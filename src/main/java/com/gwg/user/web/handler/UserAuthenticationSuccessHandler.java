@@ -12,7 +12,7 @@ import com.gwg.user.web.common.Constant;
 import com.gwg.user.web.common.Result;
 import com.gwg.user.web.configuration.AuthUser;
 import com.gwg.user.web.security.HttpForbiddenEntryPoint;
-import com.gwg.user.web.service.StaffService;
+import com.gwg.user.web.service.UserService;
 import com.gwg.user.web.util.SessionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +29,7 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 	private static Logger logger = LoggerFactory.getLogger(UserAuthenticationSuccessHandler.class);
 
 	@Autowired
-	private StaffService staffService;
+	private UserService userService;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request,

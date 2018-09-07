@@ -52,6 +52,14 @@ public class ParamUtil {
         }
     }
 
+    /**
+     * 生成员工编号 HB+5位数字
+     * @throws Exception
+     */
+    public static String generateStaffCode(){
+        return "HB00001";
+    }
+
 
 
     public static void main(String[] args) throws Exception{

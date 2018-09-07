@@ -3,17 +3,17 @@ spring:
     #name: shiro
   redis:
     sentinel:
-      #master: redis-sentinel
-      #nodes: 192.168.13.63:26382,192.168.13.62:26382
-      master: mymaster
-      nodes: 192.168.1.107:26379
-    #password: abcd_123456
+      master: redis-sentinel
+      nodes: 192.168.13.63:26382,192.168.13.62:26382
+      #master: mymaster
+      #nodes: 192.168.1.107:26379
+    password: abcd_123456
   cache:
     type: redis
     cache-names: base
   datasource:
       name: ztm
-      url: jdbc:mysql://127.0.0.1:3306/zkmkt?useUnicode=true&characterEncoding=gbk&autoReconnect=true&allowMultiQueries=true
+      url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=gbk&autoReconnect=true&allowMultiQueries=true
       username: root
       password: 123456
       type: com.alibaba.druid.pool.DruidDataSource
