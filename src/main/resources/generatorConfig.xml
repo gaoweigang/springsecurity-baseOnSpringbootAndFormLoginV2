@@ -38,14 +38,15 @@
         <table schema="" tableName="tbl_resource" domainObjectName="Resource" enableDeleteByPrimaryKey="false" enableDeleteByExample="false">
         </table>
         <table schema="" tableName="tbl_role" domainObjectName="Role" enableDeleteByPrimaryKey="false" enableDeleteByExample="false">
-        </table>-->
+        </table>
         <table schema="" tableName="tbl_role_resource" domainObjectName="RoleResource">
         </table>
-       <!-- <table schema="" tableName="tbl_user" domainObjectName="User" enableDeleteByPrimaryKey="false" enableDeleteByExample="false">
-        </table>
+
         <table schema="" tableName="tbl_user_role" domainObjectName="UserRole" enableDeleteByPrimaryKey="false" enableDeleteByExample="false">
         </table>
 -->
+        <table schema="" tableName="tbl_staff" domainObjectName="Staff" enableDeleteByPrimaryKey="false" enableDeleteByExample="false">
+        </table>
 
     </context>
 </generatorConfiguration> 

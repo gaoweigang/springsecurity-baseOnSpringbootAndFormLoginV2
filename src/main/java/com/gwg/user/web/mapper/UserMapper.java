@@ -1,12 +1,12 @@
 package com.gwg.user.web.mapper;
 
-import com.gwg.user.web.dto.UserDto;
+import com.gwg.user.web.dto.StaffDto;
 import com.gwg.user.web.exception.BusinessException;
 import com.gwg.user.web.model.User;
 import com.gwg.user.web.model.UserExample;
 import java.util.List;
 
-import com.gwg.user.web.vo.UserVo;
+import com.gwg.user.web.vo.StaffVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
@@ -33,5 +33,5 @@ public interface UserMapper {
      * @param dto
      * @return
      */
-    public List<UserVo> queryUserInfo(UserDto dto) throws BusinessException;
+    public List<StaffVo> queryUserInfo(StaffDto dto) throws BusinessException;
 }

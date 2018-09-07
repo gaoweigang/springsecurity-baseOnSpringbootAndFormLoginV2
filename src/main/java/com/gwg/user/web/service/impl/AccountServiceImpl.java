@@ -4,6 +4,7 @@ import com.gwg.user.web.dao.AccountDao;
 import com.gwg.user.web.exception.BusinessException;
 import com.gwg.user.web.model.Account;
 import com.gwg.user.web.service.AccountService;
+import com.gwg.user.web.vo.AccountVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,4 +18,12 @@ public class AccountServiceImpl implements AccountService {
     public Account queryAccountByUsreId(String userId) throws BusinessException {
         return accountDao.queryAccountByUserId(userId);
     }
+
+
+    public AccountVo queryAccountDetailByUsreId(String userId) throws BusinessException{
+
+        return accountDao.queryAccountDetailByUsreId(userId);
+
+    }
+
 }

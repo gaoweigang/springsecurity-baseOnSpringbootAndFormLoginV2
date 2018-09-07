@@ -1,8 +1,11 @@
 package com.gwg.user.web.mapper;
 
+import com.gwg.user.web.exception.BusinessException;
 import com.gwg.user.web.model.Account;
 import com.gwg.user.web.model.AccountExample;
 import java.util.List;
+
+import com.gwg.user.web.vo.AccountVo;
 import org.apache.ibatis.annotations.Param;
 
 public interface AccountMapper {
@@ -23,4 +26,7 @@ public interface AccountMapper {
     int updateByPrimaryKeySelective(Account record);
 
     int updateByPrimaryKey(Account record);
+
+    AccountVo queryAccountDetailByUsreId(@Param("userId") String userId) throws BusinessException;
+
 }

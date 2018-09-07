@@ -50,8 +50,7 @@ public class CustomAccessDecisionVoter implements AccessDecisionVoter{
 	        String function = fi.getRequestUrl(); //获取请求路径
 	        Set<GrantedAuthority> userOwnRoles = (Set<GrantedAuthority>) authUser.getAuthorities(); //获取用户所拥有的的角色集合
 	        //从数据库中查询访问该URI需要哪些角色
-	        //List<String> needRoles = roleResourceService.queryAllowedRolesByUrl(function);//根据URI获取角色
-			Set<String> needRoles = authorityManager.getAllowedRolesByUrl(function);
+	        List<String> needRoles = roleResourceService.queryAllowedRolesByUrl(function);//根据URI获取角色
 	        //判断该用户身份有所需要的岗位
 	        boolean hasAuthority = userOwnRoles.stream().anyMatch(grantedAuthority -> needRoles.contains(grantedAuthority.getAuthority()));
 	        return hasAuthority ? ACCESS_GRANTED : ACCESS_DENIED;

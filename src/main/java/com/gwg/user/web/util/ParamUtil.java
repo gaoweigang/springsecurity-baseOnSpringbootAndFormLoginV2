@@ -57,16 +57,6 @@ public class ParamUtil {
     public static void main(String[] args) throws Exception{
         System.out.println(String.class.getTypeName());
 
-       /* BeanInfo bi = Introspector.getBeanInfo(UserVo.class);
-        PropertyDescriptor[] pds = bi.getPropertyDescriptors();
-        for(PropertyDescriptor p : pds){
-            Method getMethod = p.getReadMethod();
-            Method setMethod = p.getWriteMethod();
-            Object obj = getMethod.invoke(userVo, null);
-            if(obj instanceof String){
-                setMethod.invoke(userVo, ((String) obj).trim());
-            }
-        }*/
     }
 
 }

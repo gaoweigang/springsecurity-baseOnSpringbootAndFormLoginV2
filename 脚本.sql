@@ -30,13 +30,12 @@ create table `tbl_login_log` (
   primary key (`id`)
 ) engine=innodb default charset=utf8 comment='登陆信息表';
 
---用户角色关联表 在此约定一个用户只有一个角色
-CREATE TABLE `tbl_user_role` (
+--用户角色关联表
+CREATE TABLE `tbl_account_role` (
   `id` bigint(32) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `user_id` varchar(20) DEFAULT NULL COMMENT '角色id',
   `role_code` varchar(20) DEFAULT NULL COMMENT '角色编码',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQUE_USER` (`user_id`) USING BTREE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色关联表';
 
 CREATE TABLE `tbl_role` (
@@ -85,6 +84,7 @@ CREATE TABLE `tbl_resource` (
 CREATE TABLE `tbl_account` (
   `id` bigint(32) not null auto_increment comment '主键',
   `user_id` varchar(20) not null comment '用户登录id',
+   staff_code varchar(40) default null comment '员工编号',
   `errpwdcount` TINYINT(1) default null comment '密码连续错误次数',
   `lastlogintime` timestamp null default null comment '最近成功登陆时间',
   `lastupdatepwdtime` timestamp null default null comment '最近密码更换时间',
@@ -102,12 +102,12 @@ CREATE TABLE `tbl_account` (
   unique key `unique_user_id` (`user_id`) using btree
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录信息表';
 
-
+drop table tbl_staff
 --人员信息表,仅仅是人员信息，公司在职人员并不一定可以登陆系统
-create table `tbl_user` (
+create table `tbl_staff` (
   `id` bigint(32) not null auto_increment comment '主键',
-  `user_id` varchar(20) not null comment '用户id',
-  `username` varchar(40) default null comment '员工姓名',
+   staff_code varchar(40) default null comment '员工编号',
+  `staff_name` varchar(40) default null comment '员工姓名',
   `sex` varchar(10) NOT NULL DEFAULT '0' comment '性别, 0: 女， 1：男',
    birthday timestamp NULL DEFAULT NULL COMMENT '出生日期',
    card_no varchar(32) DEFAULT NULL COMMENT '身份证号',
@@ -119,7 +119,7 @@ create table `tbl_user` (
   `entry_time` timestamp not null default current_timestamp comment '入职时间',
   `resign_time` datetime default null comment '离职日期',
    create_time timestamp NULL DEFAULT NULL comment '创建时间',
-   modify_time timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+   modify_time timestamp NULL DEFAULT NULL COMMENT '修改时间',
    creator varchar(32) default null comment '创建人',
    modifier varchar(32) default null comment '修改人',
    remark varchar(255) default null comment '描述',
@@ -128,10 +128,10 @@ create table `tbl_user` (
 ) engine=innodb default charset=utf8 comment='人员信息表';
 
 --查询表
-SELECT * from tbl_user;
+SELECT * from tbl_staff;
 --账号表
 SELECT * from tbl_account;
-SELECT * from tbl_user_role;
+SELECT * from tbl_account_role;
 SELECT * from tbl_role;
 SELECT * from tbl_role_resource;
 SELECT * from tbl_resource;
@@ -142,9 +142,9 @@ INSERT INTO `tbl_login_log`(CLIENT_IP,LOGIN_TIME , LOGOUT_TIME,SERVER_IP,SERVER_
 INSERT INTO `tbl_login_log`(CLIENT_IP,LOGIN_TIME , LOGOUT_TIME,SERVER_IP,SERVER_PORT,SERVICE_ID,USER_ID,USERNAME) VALUES ( NULL, '2018-6-8 18:38:47', '2018-6-8 18:38:47', NULL, NULL, NULL, '00000012', '测试小强新');
 
 
-INSERT INTO `tbl_user_role`(user_id, role_code) VALUES ( '00000012', 'MARKET');
-INSERT INTO `tbl_user_role`(user_id, role_code) VALUES ( '00000013', 'XLOAN' );
-INSERT INTO `tbl_user_role`(user_id, role_code) VALUES ( '00000014', 'ADMIN');
+INSERT INTO `tbl_account_role`(user_id, role_code) VALUES ( '00000012', 'MARKET');
+INSERT INTO `tbl_account_role`(user_id, role_code) VALUES ( '00000013', 'XLOAN' );
+INSERT INTO `tbl_account_role`(user_id, role_code) VALUES ( '00000014', 'ADMIN');
 
 
 INSERT INTO `tbl_resource` VALUES (1,  'systemPage',              '系统组织管理','/systemPage', 1, 0, 0, 1, NULL, '2018-6-4 11:32:30', NULL, NULL, NULL);
@@ -163,6 +163,9 @@ INSERT INTO `tbl_resource` VALUES (15, 'smsSend',            '短信发送',   '
 INSERT INTO `tbl_resource` VALUES (16, 'nameIssued',               '名单下发',       '/nameIssued', 1, 14, 15, 1, NULL, '2018-6-4 11:34:31', NULL, NULL, NULL);
 INSERT INTO `tbl_resource` VALUES (17, 'Page',               '信审',   '/auditPage', 1, 0, 16, 1, NULL, '2018-6-4 11:34:53', NULL, NULL, NULL);
 INSERT INTO `tbl_resource` VALUES (18, 'tdScore',               '同盾跑分',   '/audit/tdScore', 1, 17, 17, 1, NULL, '2018-6-4 11:34:53', NULL, NULL, NULL);
+INSERT INTO `tbl_resource` VALUES (19,  'queryUserInfoById',                '根据UserId查询用户信息',    '/user/queryUserInfoByUserId', 2, 2, 5, 1, NULL, '2018-6-4 11:33:02', NULL, NULL, NULL);
+
+
 
 
 --市场
@@ -189,14 +192,19 @@ INSERT INTO `tbl_role_resource`(role_code,res_code) VALUES ('ADMIN', 'smsSend');
 INSERT INTO `tbl_role_resource`(role_code,res_code) VALUES ('ADMIN', 'nameIssued');
 INSERT INTO `tbl_role_resource`(role_code,res_code) VALUES ('ADMIN', 'auditPage');
 INSERT INTO `tbl_role_resource`(role_code,res_code) VALUES ('ADMIN', 'tdScore');
+INSERT INTO `tbl_role_resource`(role_code,res_code) VALUES ('ADMIN', 'queryUserInfoById');
 
 
 
-INSERT INTO `tbl_user`(USER_ID,USERNAME,SEX,birthday,card_no,EMAIL,MOBILE,POSITION,VALID_FLAG,entry_time) VALUES ('00000012', 'gaoweigang', 0, '2018-3-12 16:40:00', '420881199101095178', '1245508721@qq.com', '13817191469', '开发', 1, '2018-3-12 16:40:00');
-INSERT INTO `tbl_user`(USER_ID,USERNAME,SEX,birthday,card_no,EMAIL,MOBILE,POSITION,VALID_FLAG,entry_time) VALUES ('00000013', '曾宪洲', 0, '2018-3-12 16:40:00', '420881199101095179', '13817191469@163.com', '13817191469', '开发', 1, '2018-3-12 16:40:00');
 
-INSERT INTO `tbl_account`(user_id,PASSWORD) VALUES ('00000012', '1');
-INSERT INTO `tbl_account`(user_id,PASSWORD) VALUES ('00000013', '1');
+INSERT INTO `tbl_staff`(staff_code, staff_name,SEX,birthday,card_no,EMAIL,MOBILE,POSITION,VALID_FLAG,entry_time) VALUES ('HB0001', 'gaoweigang', 0, '2018-3-12 16:40:00', '420881199101095170', '1245508721@qq.com', '13817191469', '开发', 1, '2018-3-12 16:40:00');
+INSERT INTO `tbl_staff`(staff_code, staff_name,SEX,birthday,card_no,EMAIL,MOBILE,POSITION,VALID_FLAG,entry_time) VALUES ('HB0002', '曾宪洲', 0, '2018-3-12 16:40:00', '420881199101095179', '13817191469@163.com', '13817191469', '开发', 1, '2018-3-12 16:40:00');
+INSERT INTO `tbl_staff`(staff_code, staff_name,SEX,birthday,card_no,EMAIL,MOBILE,POSITION,VALID_FLAG,entry_time) VALUES ('HB0003', 'test', 0, '2018-3-12 16:40:00', '420881199101095179', '13817191469@163.com', '13817191469', '开发', 1, '2018-3-12 16:40:00');
+
+INSERT INTO `tbl_account`(user_id,staff_code, PASSWORD) VALUES ('00000012', 'HB0001', '1');
+INSERT INTO `tbl_account`(user_id,staff_code, PASSWORD) VALUES ('00000013', 'HB0002', '1');
+INSERT INTO `tbl_account`(user_id,staff_code, PASSWORD) VALUES ('00000014', 'HB0003', '1');
+
 
 INSERT INTO `tbl_role` VALUES (1, 'MARKET', '市场', 1, '2018-5-3 13:26:32', '2018-5-3 13:26:32', NULL, NULL, NULL);
 INSERT INTO `tbl_role` VALUES (2, 'XLOAN', '信审', 1, '2018-5-8 13:53:57', '2018-5-3 13:26:34', NULL, NULL, NULL);

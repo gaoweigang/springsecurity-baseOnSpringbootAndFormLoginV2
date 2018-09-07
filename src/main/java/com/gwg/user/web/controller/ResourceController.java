@@ -53,7 +53,7 @@ public class ResourceController extends BaseController{
 	public Result queryCurrentUserMenu(){
 
 		try {
-			List<Resource> resourceList = resourceService.queryCurrentUserMenu(this.getCurrentUsername());
+			List<Resource> resourceList = resourceService.queryCurrentUserMenu(this.getCurrentStaffCode());
 			return new Result(true,  ErrorCode.S200.statusCode(), ErrorCode.S200.message(), resourceList);
 		} catch (Exception e) {
 			logger.error("异常:{}", e.getMessage());

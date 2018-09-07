@@ -15,7 +15,7 @@ function getUserInfoById(btn) {
     console.log("userId:"+userId);
     $.ajax({
         type: 'post',
-        url: 'http://localhost:8088/user/queryUserInfoById',
+        url: 'http://localhost:8088/user/queryUserInfoByUserId',
         contentType: "application/json",  //如果改为 application/json ，则是复杂的跨域请求
         data: "{\"userId\":\"" + userId + "\"}",
         dataType: 'json',

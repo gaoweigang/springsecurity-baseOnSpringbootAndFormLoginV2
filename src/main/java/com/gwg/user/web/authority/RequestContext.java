@@ -25,16 +25,7 @@ public class RequestContext {
         return instance;
     }
 
-    protected HttpServletRequest request;
-    protected HttpServletResponse response;
     protected AuthUser authUser;
-    protected String ati;
 
-    public String getRemoteHost() {
-        if (null != request) {
-            String realIP = request.getHeader("X-Real-IP");
-            return StringUtils.isNotBlank(realIP) ? realIP : request.getRemoteHost();
-        }
-        return null;
-    }
+
 }

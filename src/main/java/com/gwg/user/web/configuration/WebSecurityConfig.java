@@ -114,7 +114,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 * http://blog.csdn.net/lee353086/article/details/52537812
 		 */
 		http.sessionManagement()
-		    .maximumSessions(1)////只允许一个用户登录,如果同一个账户两次登录,那么第一个账户将被踢下线,跳转到登录页面  
+		    .maximumSessions(1)////只允许一个用户登录,如果同一个账户两次登录,那么第一个账户将被踢下线,跳转到登录页面
 		    .expiredUrl("/login.html");//session失效后跳转 
 
 		/**
@@ -125,8 +125,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		//认证异常处理
 		http.exceptionHandling()
 				.accessDeniedHandler(accessDeniedHandler())
-				.authenticationEntryPoint(httpForbiddenEntryPoint())//当用户请求了一个受保护的资源，但是用户没通过认证，那么抛出异常
-				.accessDeniedPage("/deny.html");//配置访问拒绝页面
+				.authenticationEntryPoint(httpForbiddenEntryPoint());//当用户请求了一个受保护的资源，但是用户没通过认证，那么抛出异常
+				//.accessDeniedPage("/deny.html");//配置访问拒绝页面
 
 		// 登出成
 		http.logout()
@@ -171,8 +171,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	AccessDecisionManager accessDecisionManager(){
 		//使用Spring Security内置的投票者, 使用自定义的投票者
-		List<AccessDecisionVoter<? extends Object>> voters = Arrays.asList(new RoleVoter(), new CustomAccessDecisionVoter());
+		List<AccessDecisionVoter<? extends Object>> voters = Arrays.asList(new RoleVoter(), customAccessDecisionVoter());
 		return new UnanimousBased(voters);
 	}
+
+	@Bean
+    CustomAccessDecisionVoter customAccessDecisionVoter(){
+	    return new CustomAccessDecisionVoter();
+    }
 
 }

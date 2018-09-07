@@ -6,7 +6,7 @@ import com.gwg.user.web.common.ErrorCode;
 import com.gwg.user.web.dao.ResourceDao;
 import com.gwg.user.web.dao.RoleDao;
 import com.gwg.user.web.dao.RoleResourceDao;
-import com.gwg.user.web.dao.UserDao;
+import com.gwg.user.web.dao.StaffDao;
 import com.gwg.user.web.dto.RoleDto;
 import com.gwg.user.web.exception.BusinessException;
 import com.gwg.user.web.model.Resource;
@@ -39,7 +39,7 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleResourceDao roleResourceDao;
     @Autowired
-    private UserDao userDao;
+    private StaffDao staffDao;
 
 
     @Override

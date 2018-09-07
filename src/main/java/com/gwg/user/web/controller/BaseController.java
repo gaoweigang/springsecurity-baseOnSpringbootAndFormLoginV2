@@ -33,11 +33,18 @@ public class BaseController {
         return getRequestContext().getAuthUser();
     }
 
+    protected String getCurrentUserId(){
+        AuthUser authUser = getCurrentUser();
+        if(null != authUser){
+            return authUser.getUsername();
+        }
+        return null;
+    }
 
-    protected String getCurrentUsername() {
+    protected String getCurrentStaffCode() {
         AuthUser authUser = getCurrentUser();
         if (null != authUser) {
-            return authUser.getUsername();
+            return authUser.getStaffCode();
         }
         return null;
     }
