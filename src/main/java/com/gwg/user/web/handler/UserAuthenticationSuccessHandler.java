@@ -40,9 +40,12 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 		//2.把用户信息放到Session中
 		AuthUser authUser = (AuthUser) authentication.getPrincipal();
 		SessionUtil.setSessionAttribute(Constant.USER_SESSION, authUser, request);
-		//3.把用户信息放到ThreadLocal中
-		RequestContext ctxt = RequestContext.getOrCreate();
-		ctxt.setAuthUser(authUser);
+		/*
+		  3.在用户信息放到ThreadLocal中不行，why? 因为当后续请求进来时可能与当前线程不是同一个
+		  tomcat有线程池，每一个请求进来首先尝试从tomcat线程池中取一个线程来处理该请求，如果取不到会尝试创建一个新的线程来处理该请求
+		 */
+		//RequestContext ctxt = RequestContext.getOrCreate();
+		//ctxt.setAuthUser(authUser);
 
 		//返回用户登录成功
 		HttpForbiddenEntryPoint.writeCrosInfo(response);

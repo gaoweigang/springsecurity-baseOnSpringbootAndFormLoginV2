@@ -6,8 +6,6 @@ import com.gwg.user.web.dao.UserDao;
 import com.gwg.user.web.dto.UserDto;
 import com.gwg.user.web.exception.BusinessException;
 import com.gwg.user.web.mapper.UserMapper;
-import com.gwg.user.web.model.Staff;
-import com.gwg.user.web.model.StaffExample;
 import com.gwg.user.web.model.User;
 import com.gwg.user.web.model.UserExample;
 import com.gwg.user.web.vo.UserVo;
@@ -15,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -37,6 +34,8 @@ public class UserDaoImpl implements UserDao {
             return null;
         }
         return userMapper.queryUserDetailByUsrename(username);
+        //User user = userMapper.selectByPrimaryKey(1L);
+        //return null;
     }
 
     /**

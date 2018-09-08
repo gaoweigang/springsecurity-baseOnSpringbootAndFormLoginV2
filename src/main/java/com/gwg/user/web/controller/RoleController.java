@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping({ "/role" })
 @Api(value = "roleController", tags = "角色管理")
-public class RoleController {
+public class RoleController extends BaseController{
 
 	private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
@@ -41,6 +41,7 @@ public class RoleController {
 			if(ParamUtil.isEmpty(dto.getRoleCode(), dto.getRoleName())){
 				return new Result(false, ErrorCode.S401.statusCode(), ErrorCode.S401.message(),null);
 			}
+			dto.setCreator(this.getCurrentStaffCode());
 			roleService.addRole(dto);
 			return new Result(true,  ErrorCode.S200.statusCode(), ErrorCode.S200.message(), null);
 		} catch (BusinessException e) {

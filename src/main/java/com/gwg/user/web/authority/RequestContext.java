@@ -14,7 +14,7 @@ import org.apache.commons.logging.LogFactory;
 public class RequestContext {
     private static final Log LOG = LogFactory.getLog(RequestContext.class);
 
-    private static final ThreadLocal<RequestContext> REQUEST_CONTEXT = ThreadLocalManager.createThreadLocal(RequestContext.class);
+    private static final ThreadLocal<RequestContext> REQUEST_CONTEXT =  new ThreadLocal<>();
 
     public synchronized static RequestContext getOrCreate() {
         RequestContext instance = REQUEST_CONTEXT.get();
@@ -25,6 +25,8 @@ public class RequestContext {
         return instance;
     }
 
+    private HttpServletRequest request;
+    private HttpServletResponse response;
     protected AuthUser authUser;
 
 

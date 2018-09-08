@@ -169,7 +169,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="queryRoleListByStaffCode" parameterType="java.lang.String" resultMap="java.lang.String">
+  <select id="queryRoleListByStaffCode" parameterType="java.lang.String" resultType="java.lang.String">
     SELECT
     t2.role_code
     FROM

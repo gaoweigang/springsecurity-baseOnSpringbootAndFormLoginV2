@@ -376,7 +376,7 @@
 
   <!--####################一对多关联查询######################################################################-->
   <resultMap id="UserInfoMap" type="com.gwg.user.web.vo.UserVo" >
-    <result column="userId" property="userId"/>
+    <result column="username" property="username"/>
     <result column="password" property="password"/>
     <result column="staffCode" property="staffCode"/>
     <result column="staffName" property="staffName"/>
@@ -386,7 +386,7 @@
     </collection>
   </resultMap>
 
-  <select id="queryUserDetailByUsrename" resultMap="UserInfoMap">
+  <select id="queryUserDetailByUsrename" resultMap="UserInfoMap" parameterType="java.lang.String">
     SELECT
     t1.username as username,
     t1.password as password,
@@ -409,7 +409,7 @@
   </select>
 
 
-  <select id="queryUserInfoByLimit" parameterType="java.lang.String" resultMap="UserInfoMap">
+  <select id="queryUserInfoByLimit"  resultMap="UserInfoMap"  parameterType="java.lang.String">
     SELECT
     t1.username as username,
     t2.staff_code as staffCode,

@@ -23,3 +23,10 @@ Browsersync能让浏览器实时、快速响应您的文件更改（html、js、
 
 5.Springsecurity集成swagger2
 http://www.360doc.com/content/17/0322/10/31406094_639093919.shtml
+
+6.Mybatis关联查询
+https://blog.csdn.net/qq_33561055/article/details/78861131
+
+7.对tomcat来说，每一个进来的请求(request)都需要一个线程，直到该请求结束。
+https://www.cnblogs.com/softidea/p/5750791.html
+理解：tomcat有线程池，每一个请求进来首先尝试从tomcat线程池中取一个线程来处理该请求，如果取不到会尝试创建一个新的线程来处理该请求
