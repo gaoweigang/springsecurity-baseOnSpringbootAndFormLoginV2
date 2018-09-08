@@ -1,7 +1,6 @@
-package com.gwg.user.web.configuration;
+package com.gwg.user.web.config.security;
 
 
-import com.gwg.user.web.authority.RequestContext;
 import com.gwg.user.web.common.Constant;
 import com.gwg.user.web.util.SessionUtil;
 import org.slf4j.Logger;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 拦截器,为什么需要这个拦截器？将用户信息放到与处理当前请求相关线程的ThreadLocal中，因为处理每个请求的线程可能不同
+ * 拦截器,为什么需要这个拦截器？将用户信息放到与处理当前请求相关线程的ThreadLocal中，因为处理每个请求的线程可能不同，因此需要针对每个请求处理
  */
 public class GenericRequestInterceptor extends HandlerInterceptorAdapter {
 

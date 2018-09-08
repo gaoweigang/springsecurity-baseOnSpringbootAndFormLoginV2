@@ -1,6 +1,7 @@
 package com.gwg.user.web.service.impl;
 
 import com.github.pagehelper.PageInfo;
+import com.gwg.user.web.common.Constant;
 import com.gwg.user.web.dao.StaffDao;
 import com.gwg.user.web.dao.UserDao;
 import com.gwg.user.web.dao.UserRoleDao;
@@ -13,6 +14,7 @@ import com.gwg.user.web.vo.UserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +33,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRoleDao userRoleDao;
+
+
+	@Autowired
+	private RedisTemplate redisTemplate;
 
 	public UserVo queryUserDetailByUsrename(String username) throws BusinessException{
 

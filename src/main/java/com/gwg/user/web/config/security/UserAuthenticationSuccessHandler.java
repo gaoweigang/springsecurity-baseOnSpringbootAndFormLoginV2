@@ -1,4 +1,4 @@
-package com.gwg.user.web.handler;
+package com.gwg.user.web.config.security;
 
 import java.io.IOException;
 
@@ -7,11 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
-import com.gwg.user.web.authority.RequestContext;
 import com.gwg.user.web.common.Constant;
 import com.gwg.user.web.common.Result;
-import com.gwg.user.web.configuration.AuthUser;
-import com.gwg.user.web.security.HttpForbiddenEntryPoint;
 import com.gwg.user.web.service.UserService;
 import com.gwg.user.web.util.SessionUtil;
 import org.slf4j.Logger;

@@ -1,9 +1,9 @@
-package com.gwg.user.web.configuration;
+package com.gwg.user.web.config.security;
 
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 /**

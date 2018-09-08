@@ -10,8 +10,11 @@ public class Constant {
 	public static final String SYSTEM_ERROR = "500";
 	public static final String BUSINESS_PROSS_ERROR = "501";
 	
-	
-    public static final String USER_SESSION = "userSession";
+	//Session
+    public static final String USER_SESSION = "USER_SESSION";
+
+    //员工编号前缀
+	public static final String STAFF_CODE_PREFIX = "HB";
 
     //记录是否有效
 	public static final String VALID_RECORD = "1";//有效

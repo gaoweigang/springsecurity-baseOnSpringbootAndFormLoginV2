@@ -1,4 +1,4 @@
-package com.gwg.user.web.handler;
+package com.gwg.user.web.config.security;
 
 import com.gwg.user.web.common.Constant;
 import com.gwg.user.web.util.SessionUtil;

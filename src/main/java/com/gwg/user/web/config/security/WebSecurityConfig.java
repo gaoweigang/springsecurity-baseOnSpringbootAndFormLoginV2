@@ -1,19 +1,16 @@
-package com.gwg.user.web.configuration;
+package com.gwg.user.web.config.security;
 
 import java.util.Arrays;
 import java.util.List;
 
-import com.gwg.user.web.handler.UserAccessDeniedHandler;
-import com.gwg.user.web.handler.UserAuthenticationFailureHandler;
-import com.gwg.user.web.handler.UserLogoutSuccessHandler;
-import com.gwg.user.web.security.HttpForbiddenEntryPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.vote.AffirmativeBased;
+import org.springframework.security.access.vote.AuthenticatedVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -27,13 +24,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.expression.WebExpressionVoter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.gwg.user.web.handler.UserAuthenticationSuccessHandler;
-import com.gwg.user.web.security.CustomAccessDecisionVoter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 //基于标准的，并且允许简单的基于角色的约束。但是并不具备SpringSecurity的原生注解能力。要使用基于表达式的语法
@@ -62,7 +57,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/swagger-ui.html","/webjars/**","/swagger-resources/**","/v2/**");
+		/**
+		 * web.ignoring()与permitAll()的区别？ web.ignoring()是完全不走SpringSecurity的，permitAll()需要走SpringSecurity
+		 */
+        //web.ignoring().antMatchers("/swagger-ui.html","/webjars/**","/swagger-resources/**","/v2/**");
     }
 
     @Override
@@ -71,8 +69,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// UsernamePasswordAuthenticationFilter
 		http.authorizeRequests()
 				/*********任何人都可以访问的url start *******************************/
-				.antMatchers("/login").permitAll() //
+				.antMatchers("/resource/queryAllResources").permitAll() //测试 投票器WebExpressionVoter
+				.antMatchers("/resource/queryCurrentUserMenu").hasRole("ADMIN") //测试 投票器RoleVoter,访问该资源需要ROLE_ADMIN角色权限
 				/*********任何人都可以访问的url end *******************************/
+				// swagger start ********permitAll依赖于投票系统中的投票器WebExpressionVoter，否则该配置无效************
+				.antMatchers("/swagger-ui.html").permitAll() //permitAll能不能生效依赖于投票系统
+				.antMatchers("/swagger-resources").permitAll()//permitAll能不能生效依赖于投票系统
+				.antMatchers("/images/**").permitAll()//permitAll能不能生效依赖于投票系统
+				.antMatchers("/webjars/**").permitAll()//permitAll能不能生效依赖于投票系统
+				.antMatchers("/v2/*").permitAll()//permitAll能不能生效依赖于投票系统
+				.antMatchers("/configuration/*").permitAll()//permitAll能不能生效依赖于投票系统
+				// swagger end
 				/*********配置需要资源权限访问的路径 start***************************/
 		        .accessDecisionManager(accessDecisionManager())//配置投票系统
 				/*********配置需要资源权限访问的路径 end***************************/
@@ -166,15 +173,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	AccessDeniedHandler accessDeniedHandler() {
 		return new UserAccessDeniedHandler();
 	}
-	
-	//配置具体使用的投票系统,SpringSecurity内置了3个基于AccessDecisionManager实现的投票系统：AffirmativeBased、ConsensusBased和UnanimousBased。
+
+	/**
+	 * ****重要****
+	 * 参考：https://blog.csdn.net/merryzpz/article/details/78828010
+	 *
+	 * 	配置具体使用的投票系统,SpringSecurity内置了3个基于AccessDecisionManager实现的投票系统：AffirmativeBased、ConsensusBased和UnanimousBased。
+	 * 	Spring提供的3个投票系统的区别如下(决策管理器)，至于这三个管理器是如何工作的请查看SpringSecurity源码
+	 *  1.AffirmativeBased 一票通过，只要有一个投票器通过就允许访问
+	 *  2.ConsensusBased 有一半以上投票器通过才允许访问资源
+	 *  3.UnanimousBased 所有投票器都通过才允许访问
+	 *
+	 * 	有无权限访问的最终觉得权是由决策管理器来决定的,最常见的投票器为RoleVoter， WebExpressionVoter，在RoleVoter中定义了权限的前缀。
+	 * 	1.RoleVoter
+	 *  2.WebExpressionVoter
+	 * ***只要有一个投票器通过，则有权访问*****
+	 */
 	@Bean
 	AccessDecisionManager accessDecisionManager(){
 		//使用Spring Security内置的投票者, 使用自定义的投票者
-		List<AccessDecisionVoter<? extends Object>> voters = Arrays.asList(new RoleVoter(), customAccessDecisionVoter());
-		return new UnanimousBased(voters);
+		List<AccessDecisionVoter<? extends Object>> voters = Arrays.asList(new WebExpressionVoter(), new RoleVoter(), customAccessDecisionVoter());
+		return new AffirmativeBased(voters);
 	}
 
+	/**
+	 * 自定义投票器
+	 * @return
+	 */
 	@Bean
     CustomAccessDecisionVoter customAccessDecisionVoter(){
 	    return new CustomAccessDecisionVoter();

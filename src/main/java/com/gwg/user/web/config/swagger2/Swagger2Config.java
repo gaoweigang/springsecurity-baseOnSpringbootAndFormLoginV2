@@ -1,4 +1,4 @@
-package com.gwg.user.web.configuration;
+package com.gwg.user.web.config.swagger2;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +13,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * SpringSecurity使用基于表单的登录无法使用Swagger2来进行测试，因为Swagger2页面没有登录入口
  */
-//@Configuration
-//@EnableSwagger2 //启用Swagger2
+@Configuration
+@EnableSwagger2 //启用Swagger2
 public class Swagger2Config {
 
 

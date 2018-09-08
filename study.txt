@@ -1,16 +1,13 @@
-1.访问授权策略
+参考：https://blog.csdn.net/u012702547/article/details/79019510
+
+1.spring-security原理学习
 https://www.cnblogs.com/quyixuanblog/p/5213503.html
 
-https://blog.csdn.net/u012702547/article/details/79019510
-
-spring-boot-starter-data-mongodb
-spring-cloud-starter-eureka
-spring-cloud-starter-feign
-
+2.SpringSecurity投票系统(决策系统)
 AffirmativeBased
 ConsensusBased 基于共识
 UnanimousBased
-http://blog.csdn.net/honghailiang888/article/details/53925514
+参考：https://blog.csdn.net/jaune161/article/details/18401233
 
 
 4.浏览器同步测试工具：browser-sync
@@ -36,3 +33,9 @@ https://www.cnblogs.com/softidea/p/5750791.html
 https://springcloud.cc/spring-security-zhcn.html
 
 SpringSecurity基于表单的登录无法使用Swagger2来进行测试
+
+
+后续
+spring-boot-starter-data-mongodb
+spring-cloud-starter-eureka
+spring-cloud-starter-feign

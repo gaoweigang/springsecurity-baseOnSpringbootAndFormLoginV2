@@ -1,4 +1,4 @@
-package com.gwg.user.web.configuration;
+package com.gwg.user.web.config.cors;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

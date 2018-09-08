@@ -2,8 +2,8 @@ package com.gwg.user.web.controller;
 
 import com.gwg.user.web.common.ErrorCode;
 import com.gwg.user.web.common.Result;
-import com.gwg.user.web.authority.RequestContext;
-import com.gwg.user.web.configuration.AuthUser;
+import com.gwg.user.web.config.security.RequestContext;
+import com.gwg.user.web.config.security.AuthUser;
 
 
 public class BaseController {

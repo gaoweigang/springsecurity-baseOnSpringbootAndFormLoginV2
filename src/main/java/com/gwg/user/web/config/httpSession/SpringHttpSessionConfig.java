@@ -1,4 +1,4 @@
-package com.gwg.user.web.configuration;
+package com.gwg.user.web.config.httpSession;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

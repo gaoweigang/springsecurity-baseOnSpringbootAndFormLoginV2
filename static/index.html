@@ -20,7 +20,7 @@ function queryAllResources(btn) {
                 $btn.next('p').html(JSON.stringify(obj));
             },
             function () {
-                $btn.next('p').html('error...');
+                $btn.next('p').html(JSON.stringify(obj));
             }
     )
 }
@@ -57,7 +57,7 @@ function addRole(btn) {
         },
         function () {
             console.log('角色添加失败');
-            $btn.next('input').next('input').next('p').html('error...');
+            $btn.next('input').next('input').next('p').html(JSON.stringify(obj));
         }
     )
 }
@@ -85,7 +85,7 @@ function login(btn) {
             },
             function () {
 			    console.log('登陆失败');
-                $btn.next('input').next('input').next('p').html('error...');
+                $btn.next('input').next('input').next('p').html(JSON.stringify(obj));
             }
     )
 }

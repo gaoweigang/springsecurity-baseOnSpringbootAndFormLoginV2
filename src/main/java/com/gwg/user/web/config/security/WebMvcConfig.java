@@ -1,10 +1,15 @@
-package com.gwg.user.web.configuration;
+package com.gwg.user.web.config.security;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * 继承WebMvcConfigurerAdapter采用JavaBean形式实现个性化配置定制。
@@ -13,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
-		
 	
 	@Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -35,9 +39,15 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		//registry.addResourceHandler("/**").addResourceLocations("classpath:/assets/"); //访问路径为http://localhost:8088/login.html
 	}
 
-
+	/**
+	 * 拦截器配置：用于拦截请求，将当前用户信息放到处理该请求线程的ThreadLocal中
+	 * @param registry
+	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new GenericRequestInterceptor());
 	}
+
+
+
 }
