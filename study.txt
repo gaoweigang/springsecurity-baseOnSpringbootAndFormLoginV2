@@ -34,3 +34,5 @@ https://www.cnblogs.com/softidea/p/5750791.html
 
 8.SpringSecurity中文参考文档：
 https://springcloud.cc/spring-security-zhcn.html
+
+SpringSecurity基于表单的登录无法使用Swagger2来进行测试
